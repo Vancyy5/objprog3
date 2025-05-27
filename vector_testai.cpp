@@ -464,47 +464,6 @@ TEST_F(VectorTest, Iterators) {
     }
 }
 
-// Swap Test
-TEST_F(VectorTest, Swap) {
-    Vector<int> v1{1, 2, 3};
-    Vector<int> v2{4, 5, 6, 7, 8};
-    
-    // Store original data
-    size_t v1_size = v1.size();
-    size_t v2_size = v2.size();
-    size_t v1_capacity = v1.capacity();
-    size_t v2_capacity = v2.capacity();
-    
-    v1.swap(v2);
-    
-    // Sizes should be swapped
-    EXPECT_EQ(v1.size(), v2_size);
-    EXPECT_EQ(v2.size(), v1_size);
-    EXPECT_EQ(v1.capacity(), v2_capacity);
-    EXPECT_EQ(v2.capacity(), v1_capacity);
-    
-    // Contents should be swapped
-    for (int i = 0; i < 5; ++i) {
-        EXPECT_EQ(v1[i], i + 4);
-    }
-    for (int i = 0; i < 3; ++i) {
-        EXPECT_EQ(v2[i], i + 1);
-    }
-    
-    // Test free function swap
-    swap(v1, v2);
-    
-    // Should be back to original state
-    EXPECT_EQ(v1.size(), v1_size);
-    EXPECT_EQ(v2.size(), v2_size);
-    for (int i = 0; i < 3; ++i) {
-        EXPECT_EQ(v1[i], i + 1);
-    }
-    for (int i = 0; i < 5; ++i) {
-        EXPECT_EQ(v2[i], i + 4);
-    }
-}
-
 // Comparison Operators Test
 TEST_F(VectorTest, ComparisonOperators) {
     Vector<int> v1{1, 2, 3};

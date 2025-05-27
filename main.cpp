@@ -114,14 +114,29 @@ int main()
         Laikas nuskaitymasv1("Failo nuskaitymas v1");
         nuskaitymasv1.pradeti();
         unsigned int sz = skaicius; 
+        size_t std_reallocs = 0;
+    {
         std::vector<int> v1;
-        for (int i = 1; i <= sz; ++i) v1.push_back(i);
+        size_t last_capacity = v1.capacity();
+        for (unsigned int i = 1; i <= sz; ++i) {
+            v1.push_back(i);
+            if (v1.capacity() != last_capacity) {
+                std_reallocs++;
+                last_capacity = v1.capacity();
+            }
+        }
+    }
+    std::cout << "std::vector perskirstymu skaicius: " << std_reallocs << "\n";
+
         nuskaitymasv1.baigti();
 
         Laikas nuskaitymasv2("Failo nuskaitymas v2");
         nuskaitymasv2.pradeti();
-        Vector<int> v2;
-        for (int i = 1; i <= sz; ++i) v2.push_back(i);
+       Vector<int> v2;
+    for (unsigned int i = 1; i <= sz; ++i) {
+        v2.push_back(i);
+    }
+    std::cout << "Vector perskirstymu skaicius: " << v2.reallocations() << "\n";
         nuskaitymasv2.baigti();
         
         return 0;

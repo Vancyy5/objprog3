@@ -28,6 +28,7 @@ private:
     pointer data_ = nullptr;
     size_type size_ = 0;
     size_type capacity_ = 0;
+    size_t realloc_count_ = 0;  // Naujas laukelis perskirstymų skaičiui
 
     void reallocate(size_type new_capacity);
     void destroy_elements();
@@ -89,6 +90,9 @@ public:
     void resize(size_type count, const T& value);
     void swap(Vector& other) noexcept;
 
+    // Nauja funkcija, grąžina perskirstymų skaičių
+    size_t reallocations() const { return realloc_count_; }
+
     friend bool operator==(const Vector& lhs, const Vector& rhs) {
         return lhs.size_ == rhs.size_ && std::equal(lhs.data_, lhs.data_ + lhs.size_, rhs.data_);
     }
@@ -98,10 +102,14 @@ public:
     }
 };
 
+// ================= Implementacijos ==================
+
 template <typename T>
 void Vector<T>::reallocate(size_type new_capacity) {
     if (new_capacity < size_) new_capacity = size_;
     if (new_capacity == capacity_) return;
+
+    ++realloc_count_;  // Perskirstymo skaičiaus didinimas
 
     pointer new_data = static_cast<pointer>(::operator new(new_capacity * sizeof(T)));
 
@@ -158,10 +166,12 @@ Vector<T>::Vector(const Vector& other) {
 
 template <typename T>
 Vector<T>::Vector(Vector&& other) noexcept
-    : data_(other.data_), size_(other.size_), capacity_(other.capacity_) {
+    : data_(other.data_), size_(other.size_), capacity_(other.capacity_), realloc_count_(other.realloc_count_)
+{
     other.data_ = nullptr;
     other.size_ = 0;
     other.capacity_ = 0;
+    other.realloc_count_ = 0;
 }
 
 template <typename T>
@@ -188,10 +198,12 @@ Vector<T>& Vector<T>::operator=(Vector&& other) noexcept {
         data_ = other.data_;
         size_ = other.size_;
         capacity_ = other.capacity_;
+        realloc_count_ = other.realloc_count_;
 
         other.data_ = nullptr;
         other.size_ = 0;
         other.capacity_ = 0;
+        other.realloc_count_ = 0;
     }
     return *this;
 }
@@ -256,15 +268,28 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, T&& value) {
 template <typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, size_type count, const T& value) {
     if (count == 0) return const_cast<iterator>(pos);
+
     size_type index = pos - data_;
-    reserve(std::max(capacity_ * 2, size_ + count));
-    for (size_type i = size_; i-- > index;) {
-        data_[i + count] = std::move(data_[i]);
+
+    if (size_ + count > capacity_) {
+        // Naujos talpos dydis (galbūt padvigubinti ar didinti pagal poreikį)
+        size_type new_cap = std::max(capacity_ * 2, size_ + count);
+        reallocate(new_cap);
     }
+
+    // Perkeliam elementus atgal, nuo galo
+    for (size_type i = size_; i > index; --i) {
+        new (&data_[i + count - 1]) T(std::move(data_[i - 1]));
+        data_[i - 1].~T();
+    }
+
+    // Įdedam naujus elementus
     for (size_type i = 0; i < count; ++i) {
-        data_[index + i] = value;
+        new (&data_[index + i]) T(value);
     }
+
     size_ += count;
+
     return data_ + index;
 }
 
@@ -275,16 +300,18 @@ typename Vector<T>::iterator Vector<T>::erase(const_iterator pos) {
 
 template <typename T>
 typename Vector<T>::iterator Vector<T>::erase(const_iterator first, const_iterator last) {
-    size_type index = first - data_;
-    size_type count = last - first;
-    for (size_type i = index; i + count < size_; ++i) {
+    size_type start = first - data_;
+    size_type end = last - data_;
+    size_type count = end - start;
+
+    for (size_type i = start; i < size_ - count; ++i) {
         data_[i] = std::move(data_[i + count]);
     }
     for (size_type i = size_ - count; i < size_; ++i) {
         data_[i].~T();
     }
     size_ -= count;
-    return data_ + index;
+    return data_ + start;
 }
 
 template <typename T>
@@ -312,32 +339,43 @@ typename Vector<T>::reference Vector<T>::emplace_back(Args&&... args) {
         reserve(capacity_ == 0 ? 1 : capacity_ * 2);
     }
     new (&data_[size_]) T(std::forward<Args>(args)...);
-    return data_[size_++];
+    ++size_;
+    return back();
 }
 
 template <typename T>
 void Vector<T>::pop_back() {
     if (size_ > 0) {
+        data_[size_ - 1].~T();
         --size_;
-        data_[size_].~T();
     }
 }
 
 template <typename T>
 void Vector<T>::resize(size_type count) {
-    resize(count, T());
+    if (count < size_) {
+        for (size_type i = count; i < size_; ++i) {
+            data_[i].~T();
+        }
+    } else if (count > size_) {
+        reserve(count);
+        for (size_type i = size_; i < count; ++i) {
+            new (&data_[i]) T();
+        }
+    }
+    size_ = count;
 }
 
 template <typename T>
 void Vector<T>::resize(size_type count, const T& value) {
-    if (count > size_) {
+    if (count < size_) {
+        for (size_type i = count; i < size_; ++i) {
+            data_[i].~T();
+        }
+    } else if (count > size_) {
         reserve(count);
         for (size_type i = size_; i < count; ++i) {
             new (&data_[i]) T(value);
-        }
-    } else {
-        for (size_type i = count; i < size_; ++i) {
-            data_[i].~T();
         }
     }
     size_ = count;
@@ -348,11 +386,7 @@ void Vector<T>::swap(Vector& other) noexcept {
     std::swap(data_, other.data_);
     std::swap(size_, other.size_);
     std::swap(capacity_, other.capacity_);
-}
-
-template <typename T>
-void swap(Vector<T>& lhs, Vector<T>& rhs) noexcept {
-    lhs.swap(rhs);
+    std::swap(realloc_count_, other.realloc_count_);
 }
 
 #endif // VECTOR_H
