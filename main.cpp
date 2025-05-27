@@ -1,21 +1,32 @@
 #include "funkcijos.h"
 #include "laikas.h"
 #include "zmogus.h"
+#include "vector.h"
 //---
 int main() 
 {
     try {
         
         char testChoice;
-        std::cout << "Ar norite vykdyti Studentas klases metodu testa? (t/n): ";
+
+        std::cout << "Pasirinkite ka norite daryti:\n";
+        std::cout << "1 - Vykdyti Studentas klases metodu testa\n";
+        std::cout << "2 - Programa su std::Vector\n";
+        std::cout << "3 - Programa su Vector\n";
+        std::cout << "4 - Spartos analize\n";
+        std::cout << "Kitas- programos pabaiga\n";
+        std::cout << "Pasirinkimas: ";
         std::cin >> testChoice;
 
-        if (tolower(testChoice) == 't') 
+        if (tolower(testChoice) == '1') 
         {
             testuotiStudentoMetodus();
             return 0;
         }
         
+        else if (tolower(testChoice) == '2') 
+
+        {
         std::string aplankas = "test_files";
         int skaicius;
         int pasirinktasDydis;
@@ -54,6 +65,74 @@ int main()
         testuotiDuomenuApdorojima(aplankas, skaicius);
         
         return 0;
+       }
+
+        else if (tolower(testChoice) == '3') 
+        {
+            return 0;
+        }
+       
+        else if (tolower(testChoice) == '4') 
+        {
+          std::string aplankas = "test_files";
+        int skaicius;
+        int pasirinktasDydis;
+
+        std::cout << "Pasirinkite failo dydi testavimui:\n";
+        std::cout << "1 - 10000 studentu\n";
+        std::cout << "2 - 100000 studentu\n";
+        std::cout << "3 - 1000000 studentu\n";
+        std::cout << "4 - 10000000 studentu\n";
+        std::cout << "5 - 100000000 studentu\n";
+        std::cout << "Kitas- programos pabaiga\n";
+        std::cout << "Pasirinkimas: ";
+        std::cin >> pasirinktasDydis;
+
+        switch (pasirinktasDydis) {
+            case 1:
+                skaicius = 10000;
+                break;
+            case 2:
+                skaicius = 100000;
+                break;
+            case 3:
+                skaicius = 1000000;
+                break;
+            case 4:
+                skaicius = 10000000;
+                break;
+            case 5:
+                skaicius = 100000000;
+                break;
+            default:
+                std::cout << "Neteisingas pasirinkimas" << std::endl;
+                return 1;
+        }
+        
+        srand(time(0));
+
+        Laikas nuskaitymasv1("Failo nuskaitymas v1");
+        nuskaitymasv1.pradeti();
+        unsigned int sz = skaicius; 
+        std::vector<int> v1;
+        for (int i = 1; i <= sz; ++i) v1.push_back(i);
+        nuskaitymasv1.baigti();
+
+        Laikas nuskaitymasv2("Failo nuskaitymas v2");
+        nuskaitymasv2.pradeti();
+        Vector<int> v2;
+        for (int i = 1; i <= sz; ++i) v2.push_back(i);
+        nuskaitymasv2.baigti();
+        
+        return 0;
+        }
+
+        else 
+        {
+            std::cout <<"Programs pabaiga" << std::endl;
+            return 1;
+        }
+
     }
     catch (const std::exception& e) {
         std::cerr << "Ivyko klaida: " << e.what() << std::endl;

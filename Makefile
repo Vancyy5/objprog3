@@ -9,14 +9,14 @@ GTEST_SRC = $(GTEST_DIR)/src/gtest-all.cc
 
 # Project source files
 DEPS = zmogus.h funkcijos.h laikas.h vector.h
-SRC = main.cpp funkcijos.cpp zmogus.cpp laikas.cpp vector.cpp
+SRC = main.cpp funkcijos.cpp zmogus.cpp laikas.cpp 
 OBJ = $(SRC:.cpp=.o)
 
 # Test files
 TEST_SRC1 = testai.cpp
 TEST_SRC2 = vector_testai.cpp
 TEST_OBJ1 = $(TEST_SRC1:.cpp=.o) funkcijos.o zmogus.o laikas.o gtest-all.o
-TEST_OBJ2 = $(TEST_SRC2:.cpp=.o) vector.o laikas.o gtest-all.o
+TEST_OBJ2 = $(TEST_SRC2:.cpp=.o) laikas.o gtest-all.o
 
 # Targets
 TARGET = main
