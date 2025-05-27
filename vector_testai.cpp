@@ -39,6 +39,11 @@ TEST_F(VectorTest, CountValueConstructor) {
     for (size_t i = 0; i < v.size(); ++i) {
         EXPECT_EQ(v[i], 42);
     }
+    
+    // Test zero count
+    Vector<int> v_zero(0, 10);
+    EXPECT_TRUE(v_zero.empty());
+    EXPECT_EQ(v_zero.size(), 0);
 }
 
 TEST_F(VectorTest, InitializerListConstructor) {
@@ -48,6 +53,10 @@ TEST_F(VectorTest, InitializerListConstructor) {
     for (int i = 0; i < 5; ++i) {
         EXPECT_EQ(v[i], i + 1);
     }
+    
+    // Test empty initializer list
+    Vector<int> v_empty{};
+    EXPECT_TRUE(v_empty.empty());
 }
 
 TEST_F(VectorTest, CopyConstructor) {
@@ -110,6 +119,12 @@ TEST_F(VectorTest, MoveAssignment) {
     for (int i = 0; i < 5; ++i) {
         EXPECT_EQ(v2[i], i + 1);
     }
+    
+    // Test self-move-assignment
+    Vector<int> v3{1, 2, 3};
+    v3 = std::move(v3);
+    EXPECT_EQ(v3.size(), 3);
+    EXPECT_EQ(v3[0], 1);
 }
 
 TEST_F(VectorTest, InitializerListAssignment) {
@@ -145,6 +160,17 @@ TEST_F(VectorTest, ElementAccess) {
     // Test data()
     EXPECT_EQ(*v.data(), 10);
     EXPECT_EQ(v.data()[1], 20);
+    
+    // Test const versions
+    const Vector<int>& cv = v;
+    EXPECT_EQ(cv.at(0), 10);
+    EXPECT_EQ(cv[0], 10);
+    EXPECT_EQ(cv.front(), 10);
+    EXPECT_EQ(cv.back(), 50);
+    EXPECT_EQ(*cv.data(), 10);
+    
+    // Test const at() bounds checking
+    EXPECT_THROW(cv.at(5), std::out_of_range);
 }
 
 // Capacity Tests
@@ -160,6 +186,11 @@ TEST_F(VectorTest, CapacityOperations) {
     v.reserve(10);
     EXPECT_GE(v.capacity(), 10);
     EXPECT_EQ(v.size(), 0);
+    
+    // Test reserve with smaller capacity (should not shrink)
+    size_t currentCapacity = v.capacity();
+    v.reserve(5);
+    EXPECT_EQ(v.capacity(), currentCapacity);
     
     // Add elements
     for (int i = 0; i < 5; ++i) {
@@ -192,6 +223,10 @@ TEST_F(VectorTest, PushBackAndPopBack) {
     }
     
     EXPECT_TRUE(v.empty());
+    
+    // Test pop_back on empty vector (should not crash)
+    v.pop_back();
+    EXPECT_TRUE(v.empty());
 }
 
 TEST_F(VectorTest, PushBackMoveSemantics) {
@@ -205,9 +240,6 @@ TEST_F(VectorTest, PushBackMoveSemantics) {
     
     EXPECT_EQ(v[0], "Hello");
     EXPECT_EQ(v[1], "World");
-    
-    // s1 and s2 should be moved from (exact state is implementation dependent)
-    // but we can test that our vector works correctly
     EXPECT_EQ(v.size(), 2);
 }
 
@@ -221,10 +253,16 @@ TEST_F(VectorTest, EmplaceBack) {
     EXPECT_EQ(v[0], "Hello");
     EXPECT_EQ(v[1], "AAAAA");
     EXPECT_EQ(v.size(), 2);
+    
+    // Test return value
+    std::string& ref = v.emplace_back("Test");
+    EXPECT_EQ(ref, "Test");
+    EXPECT_EQ(&ref, &v.back());
 }
 
 TEST_F(VectorTest, Clear) {
     Vector<int> v{1, 2, 3, 4, 5};
+    size_t originalCapacity = v.capacity();
     
     EXPECT_EQ(v.size(), 5);
     EXPECT_FALSE(v.empty());
@@ -234,7 +272,7 @@ TEST_F(VectorTest, Clear) {
     EXPECT_EQ(v.size(), 0);
     EXPECT_TRUE(v.empty());
     // Capacity should remain unchanged
-    EXPECT_GE(v.capacity(), 5);
+    EXPECT_EQ(v.capacity(), originalCapacity);
 }
 
 TEST_F(VectorTest, Resize) {
@@ -260,6 +298,10 @@ TEST_F(VectorTest, Resize) {
     EXPECT_EQ(v.size(), 2);
     EXPECT_EQ(v[0], 1);
     EXPECT_EQ(v[1], 2);
+    
+    // Resize to zero
+    v.resize(0);
+    EXPECT_TRUE(v.empty());
 }
 
 // Insert Tests
@@ -292,6 +334,18 @@ TEST_F(VectorTest, InsertSingleElement) {
     EXPECT_EQ(v.back(), 6);
 }
 
+TEST_F(VectorTest, InsertMoveElement) {
+    Vector<std::string> v{"Hello", "World"};
+    
+    std::string s = "Test";
+    auto it = v.insert(v.begin() + 1, std::move(s));
+    
+    EXPECT_EQ(*it, "Test");
+    EXPECT_EQ(v[0], "Hello");
+    EXPECT_EQ(v[1], "Test");
+    EXPECT_EQ(v[2], "World");
+}
+
 TEST_F(VectorTest, InsertMultipleElements) {
     Vector<int> v{1, 5};
     
@@ -306,6 +360,12 @@ TEST_F(VectorTest, InsertMultipleElements) {
         EXPECT_EQ(v[i], 2);
     }
     EXPECT_EQ(v[4], 5);
+    
+    // Test insert zero elements
+    size_t sizeBefore = v.size();
+    it = v.insert(v.begin(), 0, 99);
+    EXPECT_EQ(v.size(), sizeBefore);
+    EXPECT_EQ(it, v.begin());
 }
 
 // Erase Tests
@@ -328,6 +388,11 @@ TEST_F(VectorTest, EraseSingleElement) {
     EXPECT_EQ(*it, 1);
     EXPECT_EQ(v.size(), 4);
     EXPECT_EQ(v[0], 1);
+    
+    // Erase last element
+    v.erase(v.end() - 1);
+    EXPECT_EQ(v.size(), 3);
+    EXPECT_EQ(v.back(), 4);
 }
 
 TEST_F(VectorTest, EraseRange) {
@@ -343,6 +408,12 @@ TEST_F(VectorTest, EraseRange) {
     for (size_t i = 0; i < v.size(); ++i) {
         EXPECT_EQ(v[i], expected[i]);
     }
+    
+    // Test erase empty range
+    size_t sizeBefore = v.size();
+    it = v.erase(v.begin() + 2, v.begin() + 2);
+    EXPECT_EQ(v.size(), sizeBefore);
+    EXPECT_EQ(it, v.begin() + 2);
 }
 
 // Iterator Tests
@@ -362,9 +433,27 @@ TEST_F(VectorTest, Iterators) {
         EXPECT_EQ(*it, expected++);
     }
     
+    // Const iterators
+    expected = 1;
+    for (auto it = v.cbegin(); it != v.cend(); ++it) {
+        EXPECT_EQ(*it, expected++);
+    }
+    
     // Reverse iteration
     expected = 5;
     for (auto it = v.rbegin(); it != v.rend(); ++it) {
+        EXPECT_EQ(*it, expected--);
+    }
+    
+    // Const reverse iteration
+    expected = 5;
+    for (auto it = cv.rbegin(); it != cv.rend(); ++it) {
+        EXPECT_EQ(*it, expected--);
+    }
+    
+    // Const reverse iterators
+    expected = 5;
+    for (auto it = v.crbegin(); it != v.crend(); ++it) {
         EXPECT_EQ(*it, expected--);
     }
     
@@ -380,15 +469,19 @@ TEST_F(VectorTest, Swap) {
     Vector<int> v1{1, 2, 3};
     Vector<int> v2{4, 5, 6, 7, 8};
     
-    // Store original sizes
+    // Store original data
     size_t v1_size = v1.size();
     size_t v2_size = v2.size();
+    size_t v1_capacity = v1.capacity();
+    size_t v2_capacity = v2.capacity();
     
     v1.swap(v2);
     
     // Sizes should be swapped
     EXPECT_EQ(v1.size(), v2_size);
     EXPECT_EQ(v2.size(), v1_size);
+    EXPECT_EQ(v1.capacity(), v2_capacity);
+    EXPECT_EQ(v2.capacity(), v1_capacity);
     
     // Contents should be swapped
     for (int i = 0; i < 5; ++i) {
@@ -396,6 +489,19 @@ TEST_F(VectorTest, Swap) {
     }
     for (int i = 0; i < 3; ++i) {
         EXPECT_EQ(v2[i], i + 1);
+    }
+    
+    // Test free function swap
+    swap(v1, v2);
+    
+    // Should be back to original state
+    EXPECT_EQ(v1.size(), v1_size);
+    EXPECT_EQ(v2.size(), v2_size);
+    for (int i = 0; i < 3; ++i) {
+        EXPECT_EQ(v1[i], i + 1);
+    }
+    for (int i = 0; i < 5; ++i) {
+        EXPECT_EQ(v2[i], i + 4);
     }
 }
 
@@ -415,6 +521,12 @@ TEST_F(VectorTest, ComparisonOperators) {
     EXPECT_FALSE(v1 != v2);
     EXPECT_TRUE(v1 != v3);
     EXPECT_TRUE(v1 != v4);
+    
+    // Empty vectors
+    Vector<int> empty1, empty2;
+    EXPECT_TRUE(empty1 == empty2);
+    EXPECT_FALSE(empty1 != empty2);
+    EXPECT_FALSE(empty1 == v1);
 }
 
 // Algorithm Compatibility Test
@@ -438,11 +550,85 @@ TEST_F(VectorTest, AlgorithmCompatibility) {
     for (int i = 0; i < 9; ++i) {
         EXPECT_EQ(v[i], 9 - i);
     }
+    
+    // Test std::count
+    Vector<int> v2{1, 2, 2, 3, 2, 4};
+    int count = std::count(v2.begin(), v2.end(), 2);
+    EXPECT_EQ(count, 3);
 }
 
-// Edge Cases Test
+// Edge Cases and Error Handling Tests
+
 TEST_F(VectorTest, EdgeCases) {
     // Empty vector operations
     Vector<int> empty;
     EXPECT_NO_THROW(empty.clear());
-    EXPECT_NO_
+    EXPECT_NO_THROW(empty.pop_back());
+    EXPECT_NO_THROW(empty.shrink_to_fit());
+
+    // Large vector operations
+    Vector<int> large;
+    for (int i = 0; i < 1000; ++i) {
+        large.push_back(i);
+    }
+    EXPECT_EQ(large.size(), 1000);
+    EXPECT_EQ(large[999], 999);
+
+    // Capacity growth
+    Vector<int> growth;
+    size_t prev_capacity = growth.capacity();
+    for (int i = 0; i < 100; ++i) {
+        growth.push_back(i);
+        if (growth.capacity() < prev_capacity) {
+            ADD_FAILURE() << "Capacity should not decrease.";
+        }
+        prev_capacity = growth.capacity();
+    }
+    EXPECT_EQ(growth.size(), 100);
+}
+
+
+// Performance-related tests
+TEST_F(VectorTest, ReserveEfficiency) {
+    Vector<int> v1, v2;
+    
+    // Without reserve
+    for (int i = 0; i < 1000; ++i) {
+        v1.push_back(i);
+    }
+    
+    // With reserve
+    v2.reserve(1000);
+    for (int i = 0; i < 1000; ++i) {
+        v2.push_back(i);
+    }
+    
+    // Both should have same content
+    EXPECT_EQ(v1.size(), v2.size());
+    for (size_t i = 0; i < v1.size(); ++i) {
+        EXPECT_EQ(v1[i], v2[i]);
+    }
+}
+
+// String-specific tests
+TEST_F(VectorTest, StringVector) {
+    Vector<std::string> v;
+    
+    v.push_back("Hello");
+    v.emplace_back("World");
+    v.insert(v.begin() + 1, "Beautiful");
+    
+    EXPECT_EQ(v.size(), 3);
+    EXPECT_EQ(v[0], "Hello");
+    EXPECT_EQ(v[1], "Beautiful");
+    EXPECT_EQ(v[2], "World");
+    
+    // Test string operations
+    v[0] += " there";
+    EXPECT_EQ(v[0], "Hello there");
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
