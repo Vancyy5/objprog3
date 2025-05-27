@@ -176,6 +176,9 @@ TEST_F(StudentasTest, InputOutput)
     EXPECT_EQ(s.egzaminas(), 7);
 }
 
+
+
+
 int main(int argc, char **argv) 
 {
     ::testing::InitGoogleTest(&argc, argv);
