@@ -55,6 +55,8 @@ public:
         bool operator>(const iterator& other) const { return ptr_ > other.ptr_; }
         bool operator>=(const iterator& other) const { return ptr_ >= other.ptr_; }
         
+        friend iterator operator+(difference_type n, const iterator& it) { return it + n; }
+        
     private:
         pointer ptr_;
     };
@@ -93,6 +95,8 @@ public:
         bool operator>(const const_iterator& other) const { return ptr_ > other.ptr_; }
         bool operator>=(const const_iterator& other) const { return ptr_ >= other.ptr_; }
         
+        friend const_iterator operator+(difference_type n, const const_iterator& it) { return it + n; }
+        
     private:
         pointer ptr_;
     };
@@ -114,8 +118,12 @@ public:
     Vector();
     explicit Vector(const allocator_type& alloc);
     explicit Vector(size_type count, const T& value = T(), const allocator_type& alloc = allocator_type());
+    
+    // Iterator constructor with proper SFINAE
     template<class InputIt>
-    Vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type());
+    Vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(),
+           typename std::enable_if_t<!std::is_integral_v<InputIt>>* = nullptr);
+    
     Vector(const Vector& other);
     Vector(const Vector& other, const allocator_type& alloc);
     Vector(Vector&& other) noexcept;
@@ -131,7 +139,8 @@ public:
     // assign methods
     void assign(size_type count, const T& value);
     template<class InputIt>
-    void assign(InputIt first, InputIt last);
+    void assign(InputIt first, InputIt last,
+                typename std::enable_if_t<!std::is_integral_v<InputIt>>* = nullptr);
     void assign(std::initializer_list<T> ilist);
 
     // get_allocator
@@ -177,7 +186,8 @@ public:
     iterator insert(const_iterator pos, T&& value);
     iterator insert(const_iterator pos, size_type count, const T& value);
     template<class InputIt>
-    iterator insert(const_iterator pos, InputIt first, InputIt last);
+    iterator insert(const_iterator pos, InputIt first, InputIt last,
+                    typename std::enable_if_t<!std::is_integral_v<InputIt>>* = nullptr);
     iterator insert(const_iterator pos, std::initializer_list<T> ilist);
     
     template<class... Args>
@@ -223,6 +233,6 @@ template<class T>
 void swap(Vector<T>& lhs, Vector<T>& rhs) noexcept;
 
 // Include implementation
-#include "Vector.cpp"
+#include "vector.cpp"
 
 #endif // VECTOR_H

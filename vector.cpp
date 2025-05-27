@@ -8,7 +8,9 @@ template<typename T>
 void Vector<T>::reallocate(size_type new_capacity) {
     if (new_capacity == 0) {
         destroy_elements();
-        std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+        if (data_) {
+            std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+        }
         data_ = nullptr;
         capacity_ = 0;
         return;
@@ -17,14 +19,25 @@ void Vector<T>::reallocate(size_type new_capacity) {
     T* new_data = std::allocator_traits<allocator_type>::allocate(alloc_, new_capacity);
     
     size_type elements_to_move = std::min(size_, new_capacity);
+    size_type constructed = 0;
     
-    // Move/copy construct elements to new location
-    for (size_type i = 0; i < elements_to_move; ++i) {
-        if constexpr (std::is_nothrow_move_constructible_v<T>) {
-            std::allocator_traits<allocator_type>::construct(alloc_, new_data + i, std::move(data_[i]));
-        } else {
-            std::allocator_traits<allocator_type>::construct(alloc_, new_data + i, data_[i]);
+    try {
+        // Move/copy construct elements to new location
+        for (size_type i = 0; i < elements_to_move; ++i) {
+            if constexpr (std::is_nothrow_move_constructible_v<T>) {
+                std::allocator_traits<allocator_type>::construct(alloc_, new_data + i, std::move(data_[i]));
+            } else {
+                std::allocator_traits<allocator_type>::construct(alloc_, new_data + i, data_[i]);
+            }
+            ++constructed;
         }
+    } catch (...) {
+        // Clean up partially constructed elements
+        for (size_type i = 0; i < constructed; ++i) {
+            std::allocator_traits<allocator_type>::destroy(alloc_, new_data + i);
+        }
+        std::allocator_traits<allocator_type>::deallocate(alloc_, new_data, new_capacity);
+        throw;
     }
     
     // Clean up old data
@@ -60,48 +73,79 @@ Vector<T>::Vector(size_type count, const T& value, const allocator_type& alloc)
         data_ = std::allocator_traits<allocator_type>::allocate(alloc_, count);
         capacity_ = count;
         
-        for (size_type i = 0; i < count; ++i) {
-            std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, value);
-            ++size_;
+        try {
+            for (size_type i = 0; i < count; ++i) {
+                std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, value);
+                ++size_;
+            }
+        } catch (...) {
+            destroy_elements();
+            std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+            throw;
         }
     }
 }
 
 template<typename T>
 template<class InputIt>
-Vector<T>::Vector(InputIt first, InputIt last, const allocator_type& alloc) 
+Vector<T>::Vector(InputIt first, InputIt last, const allocator_type& alloc,
+                  typename std::enable_if_t<!std::is_integral_v<InputIt>>*) 
     : data_(nullptr), size_(0), capacity_(0), alloc_(alloc) {
-    if constexpr (std::is_same_v<typename std::iterator_traits<InputIt>::iterator_category, 
-                                std::random_access_iterator_tag>) {
+    
+    using category = typename std::iterator_traits<InputIt>::iterator_category;
+    
+    if constexpr (std::is_base_of_v<std::random_access_iterator_tag, category>) {
         // Random access iterator - we can calculate distance
-        size_type count = std::distance(first, last);
+        auto count = std::distance(first, last);
         if (count > 0) {
-            data_ = std::allocator_traits<allocator_type>::allocate(alloc_, count);
-            capacity_ = count;
+            size_type sz = static_cast<size_type>(count);
+            data_ = std::allocator_traits<allocator_type>::allocate(alloc_, sz);
+            capacity_ = sz;
             
-            for (auto it = first; it != last; ++it) {
-                std::allocator_traits<allocator_type>::construct(alloc_, data_ + size_, *it);
-                ++size_;
+            try {
+                for (auto it = first; it != last; ++it) {
+                    std::allocator_traits<allocator_type>::construct(alloc_, data_ + size_, *it);
+                    ++size_;
+                }
+            } catch (...) {
+                destroy_elements();
+                std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+                throw;
             }
         }
     } else {
         // Input iterator - grow as needed
-        for (auto it = first; it != last; ++it) {
-            push_back(*it);
+        try {
+            for (auto it = first; it != last; ++it) {
+                push_back(*it);
+            }
+        } catch (...) {
+            destroy_elements();
+            if (data_) {
+                std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+            }
+            throw;
         }
     }
 }
 
 template<typename T>
 Vector<T>::Vector(const Vector& other) 
-    : data_(nullptr), size_(0), capacity_(0), alloc_(std::allocator_traits<allocator_type>::select_on_container_copy_construction(other.alloc_)) {
+    : data_(nullptr), size_(0), capacity_(0), 
+      alloc_(std::allocator_traits<allocator_type>::select_on_container_copy_construction(other.alloc_)) {
     if (other.size_ > 0) {
         data_ = std::allocator_traits<allocator_type>::allocate(alloc_, other.size_);
         capacity_ = other.size_;
         
-        for (size_type i = 0; i < other.size_; ++i) {
-            std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, other.data_[i]);
-            ++size_;
+        try {
+            for (size_type i = 0; i < other.size_; ++i) {
+                std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, other.data_[i]);
+                ++size_;
+            }
+        } catch (...) {
+            destroy_elements();
+            std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+            throw;
         }
     }
 }
@@ -113,9 +157,15 @@ Vector<T>::Vector(const Vector& other, const allocator_type& alloc)
         data_ = std::allocator_traits<allocator_type>::allocate(alloc_, other.size_);
         capacity_ = other.size_;
         
-        for (size_type i = 0; i < other.size_; ++i) {
-            std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, other.data_[i]);
-            ++size_;
+        try {
+            for (size_type i = 0; i < other.size_; ++i) {
+                std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, other.data_[i]);
+                ++size_;
+            }
+        } catch (...) {
+            destroy_elements();
+            std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+            throw;
         }
     }
 }
@@ -149,9 +199,15 @@ Vector<T>::Vector(Vector&& other, const allocator_type& alloc)
             data_ = std::allocator_traits<allocator_type>::allocate(alloc_, other.size_);
             capacity_ = other.size_;
             
-            for (size_type i = 0; i < other.size_; ++i) {
-                std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, std::move(other.data_[i]));
-                ++size_;
+            try {
+                for (size_type i = 0; i < other.size_; ++i) {
+                    std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, std::move(other.data_[i]));
+                    ++size_;
+                }
+            } catch (...) {
+                destroy_elements();
+                std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+                throw;
             }
         }
     }
@@ -164,9 +220,15 @@ Vector<T>::Vector(std::initializer_list<T> init, const allocator_type& alloc)
         data_ = std::allocator_traits<allocator_type>::allocate(alloc_, init.size());
         capacity_ = init.size();
         
-        for (const auto& item : init) {
-            std::allocator_traits<allocator_type>::construct(alloc_, data_ + size_, item);
-            ++size_;
+        try {
+            for (const auto& item : init) {
+                std::allocator_traits<allocator_type>::construct(alloc_, data_ + size_, item);
+                ++size_;
+            }
+        } catch (...) {
+            destroy_elements();
+            std::allocator_traits<allocator_type>::deallocate(alloc_, data_, capacity_);
+            throw;
         }
     }
 }
@@ -314,19 +376,24 @@ void Vector<T>::assign(size_type count, const T& value) {
 
 template<typename T>
 template<class InputIt>
-void Vector<T>::assign(InputIt first, InputIt last) {
+void Vector<T>::assign(InputIt first, InputIt last,
+                       typename std::enable_if_t<!std::is_integral_v<InputIt>>*) {
     clear();
     
-    if constexpr (std::is_same_v<typename std::iterator_traits<InputIt>::iterator_category, 
-                                std::random_access_iterator_tag>) {
-        size_type count = std::distance(first, last);
-        if (count > capacity_) {
-            reallocate(count);
-        }
-        
-        for (auto it = first; it != last; ++it) {
-            std::allocator_traits<allocator_type>::construct(alloc_, data_ + size_, *it);
-            ++size_;
+    using category = typename std::iterator_traits<InputIt>::iterator_category;
+    
+    if constexpr (std::is_base_of_v<std::random_access_iterator_tag, category>) {
+        auto count = std::distance(first, last);
+        if (count > 0) {
+            size_type sz = static_cast<size_type>(count);
+            if (sz > capacity_) {
+                reallocate(sz);
+            }
+            
+            for (auto it = first; it != last; ++it) {
+                std::allocator_traits<allocator_type>::construct(alloc_, data_ + size_, *it);
+                ++size_;
+            }
         }
     } else {
         for (auto it = first; it != last; ++it) {
@@ -381,14 +448,14 @@ void Vector<T>::clear() noexcept {
 
 template<typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, const T& value) {
-    size_type index = pos - cbegin();
+    size_type index = static_cast<size_type>(pos - cbegin());
     
     if (size_ == capacity_) {
         size_type new_capacity = (capacity_ == 0) ? 1 : capacity_ * 2;
         reallocate(new_capacity);
     }
     
-    // Move elements to make space
+    // Move elements to make space - using reverse iteration to avoid overlap
     for (size_type i = size_; i > index; --i) {
         if (i == size_) {
             std::allocator_traits<allocator_type>::construct(alloc_, data_ + i, std::move(data_[i-1]));
@@ -410,7 +477,7 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, const T& valu
 
 template<typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, T&& value) {
-    size_type index = pos - cbegin();
+    size_type index = static_cast<size_type>(pos - cbegin());
     
     if (size_ == capacity_) {
         size_type new_capacity = (capacity_ == 0) ? 1 : capacity_ * 2;
@@ -441,7 +508,7 @@ template<typename T>
 typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, size_type count, const T& value) {
     if (count == 0) return iterator(const_cast<T*>(&(*pos)));
     
-    size_type index = pos - cbegin();
+    size_type index = static_cast<size_type>(pos - cbegin());
     
     if (size_ + count > capacity_) {
         size_type new_capacity = std::max(size_ + count, capacity_ * 2);
@@ -472,14 +539,16 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, size_type cou
 
 template<typename T>
 template<class InputIt>
-typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, InputIt first, InputIt last) {
+typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, InputIt first, InputIt last,
+                                               typename std::enable_if_t<!std::is_integral_v<InputIt>>*) {
     if (first == last) return iterator(const_cast<T*>(&(*pos)));
     
-    size_type index = pos - cbegin();
+    size_type index = static_cast<size_type>(pos - cbegin());
     
-    if constexpr (std::is_same_v<typename std::iterator_traits<InputIt>::iterator_category, 
-                                std::random_access_iterator_tag>) {
-        size_type count = std::distance(first, last);
+    using category = typename std::iterator_traits<InputIt>::iterator_category;
+    
+    if constexpr (std::is_base_of_v<std::random_access_iterator_tag, category>) {
+        size_type count = static_cast<size_type>(std::distance(first, last));
         
         if (size_ + count > capacity_) {
             size_type new_capacity = std::max(size_ + count, capacity_ * 2);
@@ -526,7 +595,7 @@ typename Vector<T>::iterator Vector<T>::insert(const_iterator pos, std::initiali
 template<typename T>
 template<class... Args>
 typename Vector<T>::iterator Vector<T>::emplace(const_iterator pos, Args&&... args) {
-    size_type index = pos - cbegin();
+    size_type index = static_cast<size_type>(pos - cbegin());
     
     if (size_ == capacity_) {
         size_type new_capacity = (capacity_ == 0) ? 1 : capacity_ * 2;
@@ -556,7 +625,7 @@ typename Vector<T>::iterator Vector<T>::emplace(const_iterator pos, Args&&... ar
 
 template<typename T>
 typename Vector<T>::iterator Vector<T>::erase(const_iterator pos) {
-    size_type index = pos - cbegin();
+    size_type index = static_cast<size_type>(pos - cbegin());
     
     // Move elements to fill the gap
     for (size_type i = index; i < size_ - 1; ++i) {
@@ -574,8 +643,8 @@ template<typename T>
 typename Vector<T>::iterator Vector<T>::erase(const_iterator first, const_iterator last) {
     if (first == last) return iterator(const_cast<T*>(&(*first)));
     
-    size_type start_index = first - cbegin();
-    size_type end_index = last - cbegin();
+    size_type start_index = static_cast<size_type>(first - cbegin());
+    size_type end_index = static_cast<size_type>(last - cbegin());
     size_type count = end_index - start_index;
     
     // Move elements to fill the gap
