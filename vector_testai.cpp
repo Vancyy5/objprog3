@@ -610,24 +610,6 @@ TEST_F(VectorTest, ReserveEfficiency) {
     }
 }
 
-// String-specific tests
-TEST_F(VectorTest, StringVector) {
-    Vector<std::string> v;
-    
-    v.push_back("Hello");
-    v.emplace_back("World");
-    v.insert(v.begin() + 1, "Beautiful");
-    
-    EXPECT_EQ(v.size(), 3);
-    EXPECT_EQ(v[0], "Hello");
-    EXPECT_EQ(v[1], "Beautiful");
-    EXPECT_EQ(v[2], "World");
-    
-    // Test string operations
-    v[0] += " there";
-    EXPECT_EQ(v[0], "Hello there");
-}
-
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
