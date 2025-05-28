@@ -181,8 +181,12 @@ void testuotiDuomenuApdorojimaImpl(const std::string& aplankas, int skaicius)
     skirstytiStudentus(grupe, kietiakiai, vargsai);
     skirstymas.baigti();
    
+
+    Laikas atspausdinimas(std::to_string(skaicius)+" studentu atspaudinimas");
+    atspausdinimas.pradeti();
     isvestiStudentusIFaila(kietiakiai, aplankas + "/kietiakiai.txt", ats);
     isvestiStudentusIFaila(vargsai, aplankas + "/vargsai.txt", ats);
+    atspausdinimas.baigti();
     
     kietiakiai.clear();
     vargsai.clear();

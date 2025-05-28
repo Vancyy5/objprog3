@@ -37,7 +37,6 @@ int main()
         std::cout << "3 - 100000 studentu\n";
         std::cout << "4 - 1000000 studentu\n";
         std::cout << "5 - 10000000 studentu\n";
-        std::cout << "6 - 100000000 studentu\n";
         std::cout << "Kitas- programos pabaiga\n";
         std::cout << "Pasirinkimas: ";
         std::cin >> pasirinktasDydis;
@@ -57,9 +56,6 @@ int main()
                 break;
             case 5:
                 skaicius = 10000000;
-                break;
-            case 6:
-                skaicius = 100000000;
                 break;
             default:
                 std::cout << "Neteisingas pasirinkimas" << std::endl;

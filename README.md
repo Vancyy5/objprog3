@@ -23,81 +23,174 @@ G++ versija 14.2.0
 ---
 Vector klasės funkcionalumas
 ---
+# Vector – Vektoriaus šablono klasė
+
 ## Pagrindinės savybės
 
-| Savybė                 | Aprašymas                                                                                   |
-|------------------------|--------------------------------------------------------------------------------------------|
-| Naršymas               | `begin()`, `end()`, `cbegin()`, `cend()`, `rbegin()`, `rend()`, `crbegin()`, `crend()`    |
-| Prieiga prie elementų  | `operator[]`, `at()`, `front()`, `back()`, `data()`                                        |
-| Dydžio informacija      | `size()`, `capacity()`, `empty()`                                                          |
-| Elementų valdymas      | `push_back()`, `pop_back()`, `insert()`, `erase()`, `clear()`, `resize()`, `reserve()`, `shrink_to_fit()` |
-| Perskirstymų skaičius  | `reallocations()` – grąžina, kiek kartų vyko atminties perskirstymas                         |
+| Savybė | Aprašymas |
+| --- | --- |
+| Naršymas | `begin()`, `end()`, `cbegin()`, `cend()`, `rbegin()`, `rend()`, `crbegin()`, `crend()` |
+| Prieiga prie elementų | `operator[]`, `at()`, `front()`, `back()`, `data()` |
+| Dydžio informacija | `size()`, `capacity()`, `empty()` |
+| Elementų valdymas | `push_back()`, `pop_back()`, `insert()`, `erase()`, `clear()`, `resize()`, `reserve()`, `shrink_to_fit()` |
 
 ---
 
 ## Konstruktoriai ir destruktorius
 
-| Konstruktorius / Metodas                | Aprašymas                                      |
-|---------------------------------------|-----------------------------------------------|
-| `Vector()`                            | Sukuria tuščią vektorių                        |
+| Konstruktorius / Metodas | Aprašymas |
+| --- | --- |
+| `Vector()` | Sukuria tuščią vektorių |
 | `Vector(size_type count, const T& value = T())` | Sukuria vektorių su `count` kopijomis `value` |
-| `Vector(std::initializer_list<T> init)` | Sukuria vektorių iš inicializavimo sąrašo      |
-| `Vector(const Vector& other)`          | Kopijavimo konstruktorius                       |
-| `Vector(Vector&& other) noexcept`      | Judančioji konstruktorius                       |
-| `~Vector()`                           | Destruktorius, atlaisvina atmintį ir sunaikina elementus |
+| `Vector(std::initializer_list<T> init)` | Sukuria vektorių iš inicializacijos sąrašo |
+| `Vector(const Vector& other)` | Kopijavimo konstruktorius |
+| `Vector(Vector&& other) noexcept` | Judinimo konstruktorius |
+| `~Vector()` | Destruktorius, atlaisvina atmintį |
 
 ---
 
 ## Naršymo metodai
 
-| Metodas                     | Aprašymas                                  |
-|-----------------------------|--------------------------------------------|
-| `iterator begin()`           | Grąžina iteratorių į pirmą elementą       |
-| `const_iterator begin() const` | Tas pats, bet konstantinis iteratorius      |
-| `iterator end()`             | Grąžina iteratorių už paskutinio elemento |
-| `const_iterator end() const` | Tas pats, bet konstantinis iteratorius     |
-| `reverse_iterator rbegin()` | Grąžina atvirkštinį iteratorių į paskutinį elementą |
-| `reverse_iterator rend()`   | Grąžina atvirkštinį iteratorių už pirmojo elemento |
+| Metodas | Aprašymas |
+| --- | --- |
+| `iterator begin()` | Grąžina iteratorių į pirmą elementą |
+| `const_iterator begin() const` | Kaip `begin()`, bet konstantinis |
+| `iterator end()` | Grąžina iteratorių už paskutinio elemento |
+| `const_iterator end() const` | Kaip `end()`, bet konstantinis |
+| `reverse_iterator rbegin()` | Atvirkštinis iteratorius nuo galo |
+| `reverse_iterator rend()` | Atvirkštinis iteratorius iki pradžios |
 
 ---
 
 ## Elementų valdymo metodai
 
-| Metodas                                             | Aprašymas                                                   |
-|-----------------------------------------------------|-------------------------------------------------------------|
-| `reference at(size_type pos)`                        | Grąžina nuorodą į elementą su ribų tikrinimu                |
-| `reference operator[](size_type pos)`               | Grąžina nuorodą į elementą (be ribų tikrinimo)              |
-| `void push_back(const T& value)`                     | Prideda kopiją elemento gale                                 |
-| `void push_back(T&& value)`                          | Prideda judinamą elementą gale                               |
-| `template<class... Args> reference emplace_back(Args&&... args)` | Kuria elementą vietoje gale                                  |
-| `void pop_back()`                                    | Pašalina paskutinį elementą                                  |
-| `iterator insert(const_iterator pos, const T& value)` | Įterpia kopiją į poziciją                                    |
-| `iterator insert(const_iterator pos, T&& value)`    | Įterpia judinamą elementą į poziciją                         |
-| `iterator insert(const_iterator pos, size_type count, const T& value)` | Įterpia kelis kopijuotus elementus                           |
-| `iterator erase(const_iterator pos)`                 | Pašalina elementą pozicijoje                                 |
-| `iterator erase(const_iterator first, const_iterator last)` | Pašalina elementų intervalą                                  |
-| `void clear()`                                       | Pašalina visus elementus                                     |
-| `void resize(size_type count)`                       | Pakeičia vektoriaus dydį, papildant arba šalinant elementus |
-| `void reserve(size_type new_cap)`                     | Rezervuoja atmintį (capacity)                               |
-| `void shrink_to_fit()`                               | Sumažina atmintį iki faktinio dydžio                         |
+| Metodas | Aprašymas |
+| --- | --- |
+| `reference at(size_type pos)` | Prieiga su ribų tikrinimu |
+| `reference operator[](size_type pos)` | Prieiga be ribų tikrinimo |
+| `void push_back(const T& value)` | Prideda elementą gale (kopija) |
+| `void push_back(T&& value)` | Prideda elementą gale (judinamas) |
+| `template<class... Args> reference emplace_back(Args&&... args)` | Sukuria elementą vietoje gale |
+| `void pop_back()` | Pašalina paskutinį elementą |
+| `iterator insert(const_iterator pos, const T& value)` | Įterpia kopiją |
+| `iterator insert(const_iterator pos, T&& value)` | Įterpia judinamą reikšmę |
+| `iterator insert(const_iterator pos, size_type count, const T& value)` | Įterpia kelis |
+| `iterator erase(const_iterator pos)` | Pašalina vieną elementą |
+| `iterator erase(const_iterator first, const_iterator last)` | Pašalina intervalą |
+| `void clear()` | Pašalina visus elementus |
+| `void resize(size_type count)` | Pakeičia dydį į `count` |
+| `void reserve(size_type new_cap)` | Rezervuoja atmintį |
+| `void shrink_to_fit()` | Sumažina talpą iki faktinio dydžio |
 
 ---
 
 ## Operatoriai
 
-| Operatorius                    | Aprašymas                               |
-|--------------------------------|----------------------------------------|
-| `operator=`                   | Priskyrimo operatoriai (kopijavimas, judinimas, initializer_list) |
-| `operator==`                  | Lygina du vektorius pagal elementus    |
-| `operator!=`                  | Ne lygu (lygina du vektorius)          |
+| Operatorius | Aprašymas |
+| --- | --- |
+| `operator=` | Priskyrimas (kopijavimas, judinimas, initializer_list) |
+| `operator==` | Lygina ar du vektoriai yra lygūs |
+| `operator!=` | Tikrina ar vektoriai skirtingi |
 
-![alt text](https://github.com/Vancyy5/objprog3/blob/v3.0/nuotraukos/Screenshot%202025-05-28%20004408.png)
+---
+
+## Papildomos funkcijos
+
+| Funkcija | Aprašymas |
+| --- | --- |
+| `void assign(size_type count, const T& value)` | Priskiria `count` kopijų `value` |
+| `template<class InputIt> void assign(InputIt first, InputIt last)` | Priskiria iš intervalo |
+| `void assign(std::initializer_list<T> ilist)` | Priskiria iš sąrašo |
+| `void swap(Vector& other) noexcept` | Apsikeičia su kitu vektoriumi |
+| `size_t reallocations() const` | Grąžina kiek kartų buvo perkelta atmintis |
+
 
 -----------------------------------------------------------------------------------------------------
 
 Kad patikrinti, ar Vector klasė veikia kaip std::vector, sukūti unit testai "vector_testai.cpp".
 
+![alt text](https://github.com/Vancyy5/objprog3/blob/v3.0/nuotraukos/Screenshot%202025-05-28%20004408.png)
 ---------------------------------------------------------------------------------------------------
 
+# Efektyvumo analizė
+
+Atlikti efektyvumo testai lyginant std::vector ir nuosavą Vector, tuščius vektorius užpildant: 10000, 100000, 1000000, 10000000 ir 100000000 int elementų naudojant push_back() funkciją.
 
 
+| Elementų skaičius| std::vector (s) | custom vector (s) |
+| --- | --- | --- |
+| 10000 | 0.000688 | 0.0007489 |
+| 100000 | 0.0031742 | 0.0026978 |
+| 1000000 | 0.0110823 | 0.0124785 |
+| 10000000 | 0.052412  | 0.038796  |
+| 100000000 | 0.431652  | 0.395542 |
+
+Išvados:
+Vector yra spartesnis.
+Tai labiau pasireiškia, kai didėja elementų skaičius.
+------------------------------------------------------------------------------
+
+# Atminties persiskirstymai 
+
+Atliekant testą su (100000000) int tipo elementų:
+
+| Konteineris| Perskirstymų skaičius | 
+| std::vector | 28 | 
+| custom vector (s) | 28 | 
+
+Išvados:
+Abi struktūros elgiasi labai panašiai.
+std::vector gali naudoti šiek tiek kitokį augimo algoritmą, todėl kartais perskirstymų daugiau.
+
+Šis testas parodo, kad Vector klasė yra efektyviai įgyvendinta ir savo elgsena artima standartinei std::vector klasei.
+
+------------------------------------------------------------------------
+![alt text](https://github.com/Vancyy5/objprog3/blob/v3.0/nuotraukos/Screenshot%202025-05-28%20004408.png)
+
+------------------------------------------------------------------------
+
+# Spartos analizė
+
+Skaitymo, rūšiavimo, skaidymo į grupes ir spausdinimo operacijų laiko matavimas: Išmatuoti laikai kiekvienam žingsniui naudojant tiek std::vector, tiek MyVector konteinerį.
+
+Testavimo metu buvo naudojami šie duomenų dydžiai:
+
+100 000 studentų įrašų
+1 000 000 studentų įrašų
+10 000 000 studentų įrašų
+
+Vidurkiai:
+
+### 100 000 studentų
+
+| Testuojamas konteineris | Failo nuskaitymas (s) | Studentų rūšiavimas (s) | Studentų skaidymas į grupes (s) | Studentų spausdinimas (s) |
+|-------------------------|------------------------:|---------------------------:|----------------------------------:|-----------------------------:|
+| `std::vector`           | 0.194867                 | 0.0200955                      | 0.0214709                             | 0.583871                       |
+| `Vector`              |  0.195314                  | 0.0218867                     | 0.0227389                             | 0.585393                       |
+
+---
+
+### 1 000 000 studentų
+
+| Testuojamas konteineris | Failo nuskaitymas (s) | Studentų rūšiavimas (s) | Studentų skaidymas į grupes (s) | Studentų spausdinimas (s) |
+|-------------------------|------------------------:|---------------------------:|----------------------------------:|-----------------------------:|
+| `std::vector`           | 2.55053                 | 0.279619                    | 0.332568                            | 6.0867                    |
+| `Vector`              |  2.48155                  | 0.271694                    | 0.312339                           | 6.256                    |
+
+---
+
+### 10 000 000 studentų
+
+| Testuojamas konteineris | Failo nuskaitymas (s) | Studentų rūšiavimas (s) | Studentų skaidymas į grupes (s) | Studentų spausdinimas (s) |
+|-------------------------|------------------------:|---------------------------:|----------------------------------:|-----------------------------:|
+| `std::vector`           | 43.0905               | 4.31249                   | 6.96529                          |  88.344                    |
+| Vector`              | 29.2696               | 3.60891                   | 5.07625                          | 78.0648                    |
+
+------------------------------------------------------------------------------
+Išvados
+---
+Spartos skirtumai: Palyginus laikus su std::vector ir MyVector konteineriais, skirtumai buvo minimalių dydžių. std::vector užtrunka šiek tiek daugiau laiko, tačiau tai gali būti dėl optimizacijų, kurias teikia C++ standartinė biblioteka. MyVector turi šiek tiek mažesnį laiką rūšiavimui ir spausdinimui, tačiau kitose operacijose skirtumai nėra dideli.
+
+Atminties naudojimas: Tiek std::vector, tiek MyVector naudoja panašias atminties valdymo technikas, todėl atminties sąnaudos yra vienodas.
+
+Veikimo stabilumas: Abi realizacijos gerai veikia su dideliais duomenų kiekiais, nes didėjant duomenų kiekiui (iki 10 milijonų studentų) laikai auga, tačiau neproporcingai didėja, kas rodo stabilų veikimą.
