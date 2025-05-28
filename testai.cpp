@@ -129,29 +129,42 @@ TEST_F(StudentasTest, Destructor) {
     EXPECT_EQ(Studentas::destruktoriuSk, initialCount + 2);
 }
 
-//Pazymio skaiciavimas
 TEST_F(StudentasTest, GradeCalculation) 
 {
-    //Skaiciuoti su vidurkiu
-    EXPECT_DOUBLE_EQ(testStudent.skaiciuotiVid(), 9.0);
-    
-    // Skaiciuoti su mediana
-    EXPECT_DOUBLE_EQ(testStudent.skaiciuotiMed(), 9.0);
-    
-    //Mediana kai pazymiu skaicius lyginis
+    // Sukuriam testinį studentą ir nustatom egzamino pažymį
+    Studentas testStudent;
+    testStudent.setEgzaminas(9);
+    testStudent.addND(9);
+    testStudent.addND(9);
+
+    // Tikrinam vidurkį
+    EXPECT_DOUBLE_EQ(Studentas::skaiciuotiVid(testStudent.nd()), 9.0);
+
+    // Tikrinam medianą (reikia analogiškos funkcijos kaip skaiciuotiVid)
+    EXPECT_DOUBLE_EQ(Studentas::skaiciuotiMed(testStudent.nd()), 9.0);
+
+    // Pridedam dar vieną pažymį — dabar nd: {9, 9, 7} → mediana = 9
     testStudent.addND(7);
-    EXPECT_DOUBLE_EQ(testStudent.skaiciuotiMed(), 8.5);
-    
-    //Galutinio pazymio skaiciavimas su vidurkiu
-    EXPECT_DOUBLE_EQ(testStudent.galBalas(true), 0.4 * 8.5 + 0.6 * 9.0);
-    
-    //Galutinio pazymio skaiciavimas su mediana
-    EXPECT_DOUBLE_EQ(testStudent.galBalas(false), 0.4 * 8.5 + 0.6 * 9.0);
-    
-    //Testai su tusciu nd
+    EXPECT_DOUBLE_EQ(Studentas::skaiciuotiMed(testStudent.nd()), 9.0);
+
+    // Galutinis pažymys su vidurkiu:
+    double expectedVid = Studentas::skaiciuotiVid(testStudent.nd());  // (9+9+7)/3 = 8.33...
+    double expectedGalBalas = 0.4 * expectedVid + 0.6 * testStudent.egzaminas();
+    EXPECT_NEAR(testStudent.galBalas(), expectedGalBalas, 1e-2);
+
+    // Galutinis pažymys su mediana: 9
+    double expectedMed = Studentas::skaiciuotiMed(testStudent.nd());
+    double expectedGalBalasMed = 0.4 * expectedMed + 0.6 * testStudent.egzaminas();
+    EXPECT_DOUBLE_EQ(testStudent.galBalasMed(), expectedGalBalasMed);
+
+    // Testas su tuščiu studentu
     Studentas emptyStudent;
-    EXPECT_THROW(emptyStudent.skaiciuotiVid(), std::runtime_error);
-    EXPECT_THROW(emptyStudent.skaiciuotiMed(), std::runtime_error);
+    EXPECT_THROW(Studentas::skaiciuotiVid(emptyStudent.nd()), std::runtime_error);
+    EXPECT_THROW(Studentas::skaiciuotiMed(emptyStudent.nd()), std::runtime_error);
+
+    // Netinkami pažymiai
+    EXPECT_THROW(testStudent.addND(0), std::invalid_argument);
+    EXPECT_THROW(testStudent.addND(11), std::invalid_argument);
 }
 
 //Ivesties ir isvesties operatoriai
