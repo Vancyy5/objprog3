@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "objprog3", "objprog3\objprog3.vcxproj", "{E981532B-4332-4097-8C34-D86C7A3F05AB}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MYsetup", "MYsetup\MYsetup.vdproj", "{A817CA32-C833-469F-8EDE-F425B738223B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E981532B-4332-4097-8C34-D86C7A3F05AB}.Release|x64.Build.0 = Release|x64
 		{E981532B-4332-4097-8C34-D86C7A3F05AB}.Release|x86.ActiveCfg = Release|Win32
 		{E981532B-4332-4097-8C34-D86C7A3F05AB}.Release|x86.Build.0 = Release|Win32
+		{A817CA32-C833-469F-8EDE-F425B738223B}.Debug|x64.ActiveCfg = Debug
+		{A817CA32-C833-469F-8EDE-F425B738223B}.Debug|x86.ActiveCfg = Debug
+		{A817CA32-C833-469F-8EDE-F425B738223B}.Release|x64.ActiveCfg = Release
+		{A817CA32-C833-469F-8EDE-F425B738223B}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

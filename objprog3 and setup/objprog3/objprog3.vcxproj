@@ -132,28 +132,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-assertion-result.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-death-test.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-filepath.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-matchers.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-port.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-printers.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-test-part.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest-typed-test.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest.cc" />
-    <ClCompile Include="..\..\external\googletest\googletest\src\gtest_main.cc" />
     <ClCompile Include="..\..\funkcijos.cpp" />
     <ClCompile Include="..\..\laikas.cpp" />
     <ClCompile Include="..\..\main.cpp" />
-    <ClCompile Include="..\..\testai.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest\include;C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest\include;C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest\include;C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest\include;C:\Users\balsy\OneDrive\Stalinis kompiuteris\objprog3\external\googletest\googletest</AdditionalIncludeDirectories>
-    </ClCompile>
-    <ClCompile Include="..\..\vector_testai.cpp" />
     <ClCompile Include="..\..\zmogus.cpp" />
-    <ClCompile Include="objprog3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\external\googletest\googletest\src\gtest-internal-inl.h" />
