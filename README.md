@@ -195,3 +195,16 @@ Spartos skirtumai: Palyginus laikus su std::vector ir MyVector konteineriais, sk
 Atminties naudojimas: Tiek std::vector, tiek MyVector naudoja panašias atminties valdymo technikas, todėl atminties sąnaudos yra vienodas.
 
 Veikimo stabilumas: Abi realizacijos gerai veikia su dideliais duomenų kiekiais, nes didėjant duomenų kiekiui (iki 10 milijonų studentų) laikai auga, tačiau neproporcingai didėja, kas rodo stabilų veikimą.
+
+-----------------------------------------------------------------------------------------
+# Programos paleidimas
+
+1. Atsisiųskite failą setup.exe į savo kompiuterį.(ji randama C:/Program files/VU/Vardenis-Pavardenis)
+
+2. Du kartus spustelėkite atsisiųstą setup.exe failą.
+
+3. Sistemai duokite leidimą
+
+4. Programa pasiekiama per darbalaukį ir start meniu.
+
+5. Spustelėkite piktogramą, kad paleistumėte programą.

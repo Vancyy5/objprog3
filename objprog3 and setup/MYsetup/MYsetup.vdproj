@@ -55,6 +55,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -71,54 +87,20 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_143515220670462681E99065453607EB"
-            {
-            "Name" = "8:Primary Output from objprog3 (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_9E7203ED5D3F49828378F9F8E24D1228"
-            "FileType" = "3:2"
-            "InstallAction" = "3:3"
-            "Arguments" = "8:/Rollback"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_37545BC8_A99D_4EC0_91AE_B966F6DCC564"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_7BCB5EFF99BF42E29E651EC5D4791275"
-            {
-            "Name" = "8:Primary Output from objprog3 (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_9E7203ED5D3F49828378F9F8E24D1228"
-            "FileType" = "3:2"
-            "InstallAction" = "3:4"
-            "Arguments" = "8:/Uninstall"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_AE85944A_3F43_4E72_AB56_1FB60B7D8154"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_AAEC63CED1E341FBAD0D8C430E7E4D47"
-            {
-            "Name" = "8:Primary Output from objprog3 (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_9E7203ED5D3F49828378F9F8E24D1228"
-            "FileType" = "3:2"
-            "InstallAction" = "3:2"
-            "Arguments" = "8:/Commit"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_DE493B90_18FB_4E0D_A182_3EF2CF95BAB3"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            }
             "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_D8EF0902527848E8B5EA099815F0691B"
             {
             "Name" = "8:Primary Output from objprog3 (Active)"
@@ -216,7 +198,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_571FC90A59104E47B95F091C4E7C912C"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]VU"
+            "DefaultLocation" = "8:[ProgramFilesFolder]VU\\[USERNAME]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -276,7 +258,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MYsetup"
         "ProductCode" = "8:{8C6D74FE-5BCF-4B30-A2D0-A6E5C6549D87}"
-        "PackageCode" = "8:{67D7CFD7-EB02-4963-A02E-DE001E021512}"
+        "PackageCode" = "8:{F16AFC36-F206-465B-933B-1D97925CC675}"
         "UpgradeCode" = "8:{C2881DFD-E726-4C4E-AD43-1CA83A49A7D6}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -396,7 +378,21 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_08ADDB990EDC409291F626CD8263FDA1"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_246DFAD72967492CAC0A87D681381458"
+            {
+            "Name" = "8:Shortcut to %sPrimary Output from objprog3 (Active)"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_9E7203ED5D3F49828378F9F8E24D1228"
+            "Folder" = "8:_864CD336788D44469CDA4AF89E2431DD"
+            "WorkingFolder" = "8:_571FC90A59104E47B95F091C4E7C912C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E05AE5C153FA4A38B027948C6A8FCF8B"
             {
             "Name" = "8:Shortcut to %sPrimary Output from objprog3 (Active)"
             "Arguments" = "8:"
