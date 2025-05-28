@@ -135,6 +135,7 @@ Tai labiau pasireiškia, kai didėja elementų skaičius.
 Atliekant testą su (100000000) int tipo elementų:
 
 | Konteineris| Perskirstymų skaičius | 
+| --- | --- | 
 | std::vector | 28 | 
 | custom vector (s) | 28 | 
 
@@ -145,7 +146,7 @@ std::vector gali naudoti šiek tiek kitokį augimo algoritmą, todėl kartais pe
 Šis testas parodo, kad Vector klasė yra efektyviai įgyvendinta ir savo elgsena artima standartinei std::vector klasei.
 
 ------------------------------------------------------------------------
-![alt text](https://github.com/Vancyy5/objprog3/blob/v3.0/nuotraukos/Screenshot%202025-05-28%20004408.png)
+![alt text](https://github.com/Vancyy5/objprog3/blob/v3.0/nuotraukos/Screenshot%202025-05-28%20073805.png)
 
 ------------------------------------------------------------------------
 
