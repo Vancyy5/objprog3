@@ -90,6 +90,12 @@ public:
     void resize(size_type count, const T& value);
     void swap(Vector& other) noexcept;
 
+    // NEW: assign methods - missing from original implementation
+    void assign(size_type count, const T& value);
+    template<class InputIt>
+    void assign(InputIt first, InputIt last);
+    void assign(std::initializer_list<T> ilist);
+
     // Nauja funkcija, grąžina perskirstymų skaičių
     size_t reallocations() const { return realloc_count_; }
 
@@ -244,6 +250,39 @@ void Vector<T>::shrink_to_fit() {
 template <typename T>
 void Vector<T>::clear() noexcept {
     destroy_elements();
+}
+
+// NEW: assign method implementations
+template <typename T>
+void Vector<T>::assign(size_type count, const T& value) {
+    clear();
+    if (count > capacity_) {
+        reallocate(count);
+    }
+    for (size_type i = 0; i < count; ++i) {
+        new (&data_[i]) T(value);
+    }
+    size_ = count;
+}
+
+template <typename T>
+template<class InputIt>
+void Vector<T>::assign(InputIt first, InputIt last) {
+    clear();
+    size_type count = std::distance(first, last);
+    if (count > capacity_) {
+        reallocate(count);
+    }
+    size_type i = 0;
+    for (auto it = first; it != last; ++it, ++i) {
+        new (&data_[i]) T(*it);
+    }
+    size_ = count;
+}
+
+template <typename T>
+void Vector<T>::assign(std::initializer_list<T> ilist) {
+    assign(ilist.begin(), ilist.end());
 }
 
 template <typename T>

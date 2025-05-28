@@ -1,5 +1,8 @@
 #include "funkcijos.h"
 #include "laikas.h"
+#include "vector.h"
+#include <cstdlib>
+#include <ctime>
 
 // Initialize static counter
 int Studentas::destruktoriuSk = 0;
@@ -20,7 +23,6 @@ Studentas::Studentas(const Studentas& other) :
 
 // Copy assignment operator
 Studentas& Studentas::operator=(const Studentas& other) {
-
     if (this != &other) {
         Zmogus::operator=(other); // Call base class assignment operator
         nd_ = other.nd_;
@@ -55,7 +57,14 @@ Studentas& Studentas::operator=(Studentas&& other) noexcept {
     return *this;
 }
 
-//Output
+// Destructor
+Studentas::~Studentas()
+{
+    nd_.clear();
+    destruktoriuSk++; 
+}
+
+// Implementation of pure virtual methods
 void Studentas::print(std::ostream& os) const 
 {
     os << std::left << std::setw(15) << vardas_ << std::setw(15) << pavarde_;
@@ -87,27 +96,18 @@ std::istream& Studentas::readStudent(std::istream& is) {
         }
     }
     
-    if (is.fail() && !is.eof()) {
-        throw std::invalid_argument("Klaida: Netinkamas pazymys (ne skaicius) studentui " + vardas_ + " " + pavarde_);
-    }
+    // Išvalome stream būseną (pašalinta klaidinga klaidos patikra)
+    is.clear();
     
-    if (!nd_.empty())
-    {
+    // Paskutinis pažymys yra egzaminas
+    if (!nd_.empty()) {
         egzaminas_ = nd_.back();
         nd_.pop_back();
     }
     
-    is.clear();
-    
     return is;
 }
-//---
-Studentas::~Studentas()
-{
-    nd_.clear();
-    destruktoriuSk++; 
-}
-//---
+
 void Studentas::addND(int pazymys) {
     if (pazymys >= 1 && pazymys <= 10) {
         nd_.push_back(pazymys);
@@ -116,224 +116,32 @@ void Studentas::addND(int pazymys) {
     }
 }
 
-//---
 void Studentas::clearND() 
 {
     nd_.clear();
 }
 
-//---
-double Studentas::skaiciuotiVid() const {
-    if (nd_.empty()) {
-        throw std::runtime_error("Namu darbu sarasas negali buti tuscias");
-    } else {
-        double suma = 0.0;
-        for (const auto& nd_elem : nd_) {
-            suma += nd_elem;
-        }
-        return suma / nd_.size();
-    }
+// Comparison functions
+bool compareByVardas(const Studentas& a, const Studentas& b) { 
+    return a.vardas() < b.vardas(); 
 }
 
-double Studentas::skaiciuotiMed() const {
-    if (nd_.empty()) {
-        throw std::runtime_error("Namu darbu sarasas negali buti tuscias");
-    } else {
-        std::vector<int> nd_copy = nd_;
-        std::sort(nd_copy.begin(), nd_copy.end());
-        
-        int dydis = nd_copy.size();
-        if (dydis % 2 == 0) {
-            return (nd_copy[dydis / 2 - 1] + nd_copy[dydis / 2]) / 2.0;
-        } else {
-            return nd_copy[dydis / 2];
-        }
-    }
+bool compareByPavarde(const Studentas& a, const Studentas& b) { 
+    return a.pavarde() < b.pavarde(); 
 }
 
-double Studentas::galBalas(bool naudotiVidurki) const {
-    double ndRezultatas;
-    
-    if (naudotiVidurki) {
-        ndRezultatas = skaiciuotiVid();
-    } else {
-        ndRezultatas = skaiciuotiMed();
-    }
-    
-    return 0.4 * ndRezultatas + 0.6 * egzaminas_;
+bool compareByGalutinis(const Studentas& a, const Studentas& b) { 
+    return a.galutinis() > b.galutinis(); 
 }
 
-// Static method for file reading
-void Studentas::nuskaitymasFile(std::vector<Studentas>& grupe, const std::string& failoPavadinimas) {
-    std::ifstream inputFile(failoPavadinimas);
-    
-    if (!inputFile.is_open()) {
-        throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
-    }
-    
-    std::string line;
-    
-    while (std::getline(inputFile, line)) {
-        std::stringstream ss(line);
-        Studentas stud;
-        ss >> stud;
-        
-        if (!stud.vardas().empty()) {
-            stud.setGalutinis(stud.galBalas(true));
-            grupe.push_back(stud);
-        }
-    }
-    
-    inputFile.close();
-}
 
-bool compareByVardas(const Studentas& a, const Studentas& b) {
-    return a.vardas() < b.vardas();
-}
-
-bool compareByPavarde(const Studentas& a, const Studentas& b) {
-    return a.pavarde() < b.pavarde();
-}
-
-bool compareByGalutinis(const Studentas& a, const Studentas& b) {
-    return a.galutinis() > b.galutinis();
-}
-
-void skaitytiIsFailo(std::vector<Studentas>& grupe, const std::string& failoPavadinimas)
+template <typename Container>
+void testuotiDuomenuApdorojimaImpl(const std::string& aplankas, int skaicius) 
 {
-    std::ifstream inputFile(failoPavadinimas, std::ios::in);
-    std::vector<char> buffer(65536);
-    inputFile.rdbuf()->pubsetbuf(buffer.data(), buffer.size());
-    
-    if (!inputFile.is_open()) {
-        throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
-    }
-    
-    Studentas laik;
-    std::string line;
-    
-    getline(inputFile, line);
-    
-    while (getline(inputFile, line)) {
-        std::stringstream ss(line);
-        
-        std::string vardas, pavarde;
-        ss >> vardas >> pavarde;
-        
-        laik.setVardas(vardas);
-        laik.setPavarde(pavarde);
-        
-        laik.clearND();
-        int pazymys;
-        std::vector<int> scores;
-        
-        while (ss >> pazymys) {
-            if (pazymys >= 1 && pazymys <= 10) {
-                scores.push_back(pazymys);
-            } else {
-                throw std::invalid_argument("Klaida: Netinkamas pazymys studentui " + vardas + " " + pavarde);
-            }
-        }
-        
-        if (ss.fail() && !ss.eof()) {
-            throw std::invalid_argument("Klaida: Netinkamas pazymys (ne skaicius) studentui " + vardas + " " + pavarde);
-        }
-        
-        if (!scores.empty()) {
-            laik.setEgzaminas(scores.back());
-            scores.pop_back();
-            
-            for (const auto& score : scores) {
-                laik.addND(score);
-            }
-            
-            grupe.push_back(laik);
-        }
-    }
-    
-    inputFile.close();
-}
+    Container grupe;
+    Container kietiakiai;
+    Container vargsai;
 
-void isvestiStudentusIFaila(const std::vector<Studentas>& studentai, const std::string& failoPavadinimas, char ats) {
-    std::ofstream outFile(failoPavadinimas);
-    if (!outFile.is_open()) {
-        throw std::runtime_error("Nepavyko atidaryti failo: " + failoPavadinimas);
-    }
-    
-    std::vector<char> buffer(65536);
-    outFile.rdbuf()->pubsetbuf(buffer.data(), buffer.size());
-    
-    std::stringstream header;
-    header << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde";
-
-    if (std::tolower(ats) == 'v') {
-        header << std::left << "Galutinis (Vid.)" << std::endl;
-    } else {
-        header << std::left << "Galutinis (Med.)" << std::endl;
-    }
-    header << std::string(50, '-') << std::endl;
-    
-    outFile << header.str();
-    
-    const size_t BATCH_SIZE = 1000;
-    std::stringstream batch;
-    size_t count = 0;
-    
-    for (const auto& a : studentai) {
-        batch << std::left << std::setw(15) << a.vardas() << std::setw(15) << a.pavarde()
-              << std::fixed << std::setprecision(2) << a.galutinis() << std::endl;
-        
-        if (++count % BATCH_SIZE == 0) {
-            outFile << batch.str();
-            batch.str("");
-            batch.clear();
-        }
-    }
-    
-    if (!batch.str().empty()) {
-        outFile << batch.str();
-    }
-}
-
-void sortStudentai(std::vector<Studentas>& grupe, char sortingOption) 
-{
-    if (sortingOption == 'v' || sortingOption == 'V') 
-    {
-        std::sort(grupe.begin(), grupe.end(), compareByVardas);
-    } else if (sortingOption == 'p' || sortingOption == 'P') 
-    {
-        std::sort(grupe.begin(), grupe.end(), compareByPavarde);
-    } else if (sortingOption == 'g' || sortingOption == 'G') 
-    {
-        std::sort(grupe.begin(), grupe.end(), compareByGalutinis);
-    }
-}
-
-void skirstytiStudentus(std::vector<Studentas>& grupe, std::vector<Studentas>& kietiakiai, std::vector<Studentas>& vargsai)
-{
-    auto it = std::partition(grupe.begin(), grupe.end(), [](const auto& a) 
-    { 
-        return a.galutinis() >= 5.0; 
-    }
-    );
-    
-    kietiakiai.reserve(kietiakiai.size() + std::distance(grupe.begin(), it));
-    vargsai.reserve(vargsai.size() + std::distance(it, grupe.end()));
-    
-    std::move(grupe.begin(), it, std::back_inserter(kietiakiai));
-    std::move(it, grupe.end(), std::back_inserter(vargsai));
-    
-    grupe.clear();
-}
-
-void testuotiDuomenuApdorojima(const std::string& aplankas, int skaicius) 
-{
-    srand(time(0));
-    
-    std::vector<Studentas> grupe;
-    std::vector<Studentas> kietiakiai;
-    std::vector<Studentas> vargsai;
-    
     std::cout << "Ar galutinio balo skaiciavimui norite naudoti vidurki ar mediana? (v/m): ";
     char ats;
     std::cin >> ats;
@@ -360,10 +168,9 @@ void testuotiDuomenuApdorojima(const std::string& aplankas, int skaicius)
     
     bool naudotiVidurki = (std::tolower(ats) == 'v');
     for (auto& studentas : grupe) {
-        studentas.setGalutinis(studentas.galBalas(naudotiVidurki));
+        studentas.setGalutinis(naudotiVidurki ? studentas.galBalas() : studentas.galBalasMed());
     }
     
-
     Laikas rikiavimas(std::to_string(skaicius) + " studentu failo rusiavimas");
     rikiavimas.pradeti();
     sortStudentai(grupe, sortingOption);
@@ -380,6 +187,18 @@ void testuotiDuomenuApdorojima(const std::string& aplankas, int skaicius)
     kietiakiai.clear();
     vargsai.clear();
 }
+
+void testuotiDuomenuApdorojima(const std::string& aplankas, int skaicius, int testChoice)
+{
+  std::srand(std::time(0));
+    if(testChoice == '2')  
+        testuotiDuomenuApdorojimaImpl<std::vector<Studentas>>(aplankas, skaicius);
+    else if(testChoice == '3') 
+        testuotiDuomenuApdorojimaImpl<Vector<Studentas>>(aplankas, skaicius);
+}
+
+template void testuotiDuomenuApdorojimaImpl<std::vector<Studentas>>(const std::string& aplankas, int skaicius);
+template void testuotiDuomenuApdorojimaImpl<Vector<Studentas>>(const std::string& aplankas, int skaicius);
 
 void testuotiStudentoMetodus() {
     std::cout << "\n===== STUDENTAS KLASES METODU TESTAVIMAS =====\n" << std::endl;
