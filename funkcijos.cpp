@@ -299,19 +299,21 @@ void testuotiStudentoMetodus() {
     std::cout << "stringstream rezultatas: " << oss2.str() << std::endl;
     assert(oss2.str().find("Antanaitis") != std::string::npos);
     
-    // === 8. File reading with Studentas::nuskaitymasFile ===
     std::cout << "\n[TEST 8] Failo nuskaitymas su nuskaitymasFile()\n";
-    std::ofstream testFailas("studentai.txt");
-    testFailas << "Vanesa Balsyte 10 9 8 7 6" << std::endl;
-    testFailas << "Petras Petrauskas 8 9 7 10 5" << std::endl;
-    testFailas.close();
 
-    std::vector<Studentas> grupe;
-    Studentas::nuskaitymasFile(grupe, "studentai.txt");
-    std::cout << "Gauta studentu: " << grupe.size() << std::endl;
-    assert(grupe.size() == 2);
-    assert(grupe[0].vardas() == "Vanesa");
-    assert(grupe[1].vardas() == "Petras");
+std::ofstream testFailas("studentai.txt");
+testFailas << "Vardas Pavarde ND1 ND2 ND3 ND4 ND5" << std::endl;  // <- Pridėta antraštė
+testFailas << "Vanesa Balsyte 10 9 8 7 6" << std::endl;
+testFailas << "Petras Petrauskas 8 9 7 10 5" << std::endl;
+testFailas.close();
+
+std::vector<Studentas> grupe;
+Studentas::nuskaitymasFile(grupe, "studentai.txt");
+
+std::cout << "Gauta studentu: " << grupe.size() << std::endl;
+assert(grupe.size() == 2);
+assert(grupe[0].vardas() == "Vanesa");
+assert(grupe[1].vardas() == "Petras");
     
     // === 9. Output to console and file ===
     std::cout << "\n[TEST 9] Isvedimas i ekrana ir i faila\n";
