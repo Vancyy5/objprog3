@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isvestistudentusifaila_0',['isvestiStudentusIFaila',['../funkcijos_8cpp.html#a611987d71fb1ea6c7b02ac55df0d05df',1,'isvestiStudentusIFaila(const std::vector&lt; Studentas &gt; &amp;studentai, const std::string &amp;failoPavadinimas, char ats):&#160;funkcijos.cpp'],['../funkcijos_8h.html#a611987d71fb1ea6c7b02ac55df0d05df',1,'isvestiStudentusIFaila(const std::vector&lt; Studentas &gt; &amp;studentai, const std::string &amp;failoPavadinimas, char ats):&#160;funkcijos.cpp']]]
+  ['front_0',['front',['../class_vector.html#a2f2e14b2a9a0041c783b5ad44dd59593',1,'Vector::front()'],['../class_vector.html#a78dc531e4c79c33f8e7d4574a155f529',1,'Vector::front() const']]]
 ];

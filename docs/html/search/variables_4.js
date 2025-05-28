@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pavarde_5f_0',['pavarde_',['../class_zmogus.html#a85cd6103a5f887059263d15413a3f081',1,'Zmogus']]]
+  ['nd_5f_0',['nd_',['../class_studentas.html#a1c3423fc1d91e7d2d8271884d60dde3c',1,'Studentas']]]
 ];

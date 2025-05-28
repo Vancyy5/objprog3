@@ -2,6 +2,9 @@
 \hypertarget{funkcijos_8cpp}{}\label{funkcijos_8cpp}\index{funkcijos.cpp@{funkcijos.cpp}}
 {\ttfamily \#include "{}funkcijos.\+h"{}}\newline
 {\ttfamily \#include "{}laikas.\+h"{}}\newline
+{\ttfamily \#include "{}vector.\+h"{}}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -11,16 +14,14 @@ bool \mbox{\hyperlink{funkcijos_8cpp_af2ab3189b93eeee714fd925f27f19b52}{compare\
 \begin{DoxyCompactList}\small\item\em Compare students by last name. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{funkcijos_8cpp_a9b6a228fc464a9d4c17b271db47a90ce}{compare\+By\+Galutinis}} (const \mbox{\hyperlink{class_studentas}{Studentas}} \&a, const \mbox{\hyperlink{class_studentas}{Studentas}} \&b)
 \begin{DoxyCompactList}\small\item\em Compare students by final grade (descending) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{funkcijos_8cpp_a55d40c2545ce55b7e4ee9536f339d291}{skaityti\+Is\+Failo}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&grupe, const std\+::string \&failo\+Pavadinimas)
-\begin{DoxyCompactList}\small\item\em Read students from file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{funkcijos_8cpp_a611987d71fb1ea6c7b02ac55df0d05df}{isvesti\+Studentus\+IFaila}} (const std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai, const std\+::string \&failo\+Pavadinimas, char ats)
-\begin{DoxyCompactList}\small\item\em Write students to file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{funkcijos_8cpp_aa6728add47c688cc828f070be465134e}{sort\+Studentai}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&grupe, char sorting\+Option)
-\begin{DoxyCompactList}\small\item\em Sort students by specified criterion. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{funkcijos_8cpp_a3bcd71c154910a66e7be751cab3eb68d}{skirstyti\+Studentus}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&grupe, std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&kietiakiai, std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&vargsai)
-\begin{DoxyCompactList}\small\item\em Split students into two groups based on final grade. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{funkcijos_8cpp_a9b67506502ea72a87dd4f7e8cc0f0072}{testuoti\+Duomenu\+Apdorojima}} (const std\+::string \&aplankas, int skaicius)
+{\footnotesize template$<$typename Container$>$ }\\void \mbox{\hyperlink{funkcijos_8cpp_ab4828f324b7c685ef09acdf898a93891}{testuoti\+Duomenu\+Apdorojima\+Impl}} (const std\+::string \&aplankas, int skaicius)
+\begin{DoxyCompactList}\small\item\em Implementation of data processing test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{funkcijos_8cpp_a3225ebb2cd4a8289a2529734d9f5b282}{testuoti\+Duomenu\+Apdorojima}} (const std\+::string \&aplankas, int skaicius, int test\+Choice)
 \begin{DoxyCompactList}\small\item\em Test data processing performance. \end{DoxyCompactList}\item 
+template void \mbox{\hyperlink{funkcijos_8cpp_ac8002810986d15c30d12cced28326ed9}{testuoti\+Duomenu\+Apdorojima\+Impl$<$ std\+::vector$<$ Studentas $>$ $>$}} (const std\+::string \&aplankas, int skaicius)
+\item 
+template void \mbox{\hyperlink{funkcijos_8cpp_aa003719201c2bca4b4e7fe17a6e6c3e5}{testuoti\+Duomenu\+Apdorojima\+Impl$<$ Vector$<$ Studentas $>$ $>$}} (const std\+::string \&aplankas, int skaicius)
+\item 
 void \mbox{\hyperlink{funkcijos_8cpp_a0bcc3fa49fd1bf2474cbfd5ccf2aaff2}{testuoti\+Studento\+Metodus}} ()
 \begin{DoxyCompactList}\small\item\em Test \doxylink{class_studentas}{Studentas} class methods. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{funkcijos_8cpp_a2df0a259af1958b8b4c2eb00a5806530}{testuoti\+Zmogaus\+Klase}} ()
@@ -38,16 +39,6 @@ bool compare\+By\+Galutinis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperli
 
 Compare students by final grade (descending) 
 
-
-\begin{DoxyParams}{Parameters}
-{\em a} & First student \\
-\hline
-{\em b} & Second student \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if a\textquotesingle{}s final grade is higher than b\textquotesingle{}s 
-\end{DoxyReturn}
 \Hypertarget{funkcijos_8cpp_af2ab3189b93eeee714fd925f27f19b52}\index{funkcijos.cpp@{funkcijos.cpp}!compareByPavarde@{compareByPavarde}}
 \index{compareByPavarde@{compareByPavarde}!funkcijos.cpp@{funkcijos.cpp}}
 \doxysubsubsection{\texorpdfstring{compareByPavarde()}{compareByPavarde()}}
@@ -58,16 +49,6 @@ bool compare\+By\+Pavarde (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink
 
 Compare students by last name. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em a} & First student \\
-\hline
-{\em b} & Second student \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if a\textquotesingle{}s surname comes before b\textquotesingle{}s 
-\end{DoxyReturn}
 \Hypertarget{funkcijos_8cpp_abed46d0f5cd92f3e761bff20e25ce475}\index{funkcijos.cpp@{funkcijos.cpp}!compareByVardas@{compareByVardas}}
 \index{compareByVardas@{compareByVardas}!funkcijos.cpp@{funkcijos.cpp}}
 \doxysubsubsection{\texorpdfstring{compareByVardas()}{compareByVardas()}}
@@ -78,93 +59,11 @@ bool compare\+By\+Vardas (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{
 
 Compare students by first name. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em a} & First student \\
-\hline
-{\em b} & Second student \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if a\textquotesingle{}s name comes before b\textquotesingle{}s 
-\end{DoxyReturn}
-\Hypertarget{funkcijos_8cpp_a611987d71fb1ea6c7b02ac55df0d05df}\index{funkcijos.cpp@{funkcijos.cpp}!isvestiStudentusIFaila@{isvestiStudentusIFaila}}
-\index{isvestiStudentusIFaila@{isvestiStudentusIFaila}!funkcijos.cpp@{funkcijos.cpp}}
-\doxysubsubsection{\texorpdfstring{isvestiStudentusIFaila()}{isvestiStudentusIFaila()}}
-{\footnotesize\ttfamily \label{funkcijos_8cpp_a611987d71fb1ea6c7b02ac55df0d05df} 
-void isvesti\+Studentus\+IFaila (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{, }\item[{const std\+::string \&}]{failo\+Pavadinimas}{, }\item[{char}]{ats}{}\end{DoxyParamCaption})}
-
-
-
-Write students to file. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em studentai} & Students to write \\
-\hline
-{\em failo\+Pavadinimas} & Filename to write to \\
-\hline
-{\em ats} & Whether to use average (\textquotesingle{}v\textquotesingle{}) or median (\textquotesingle{}m\textquotesingle{}) for final grade \\
-\hline
-\end{DoxyParams}
-\Hypertarget{funkcijos_8cpp_a55d40c2545ce55b7e4ee9536f339d291}\index{funkcijos.cpp@{funkcijos.cpp}!skaitytiIsFailo@{skaitytiIsFailo}}
-\index{skaitytiIsFailo@{skaitytiIsFailo}!funkcijos.cpp@{funkcijos.cpp}}
-\doxysubsubsection{\texorpdfstring{skaitytiIsFailo()}{skaitytiIsFailo()}}
-{\footnotesize\ttfamily \label{funkcijos_8cpp_a55d40c2545ce55b7e4ee9536f339d291} 
-void skaityti\+Is\+Failo (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{grupe}{, }\item[{const std\+::string \&}]{failo\+Pavadinimas}{}\end{DoxyParamCaption})}
-
-
-
-Read students from file. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em grupe} & Vector to store students \\
-\hline
-{\em failo\+Pavadinimas} & Filename to read from \\
-\hline
-\end{DoxyParams}
-\Hypertarget{funkcijos_8cpp_a3bcd71c154910a66e7be751cab3eb68d}\index{funkcijos.cpp@{funkcijos.cpp}!skirstytiStudentus@{skirstytiStudentus}}
-\index{skirstytiStudentus@{skirstytiStudentus}!funkcijos.cpp@{funkcijos.cpp}}
-\doxysubsubsection{\texorpdfstring{skirstytiStudentus()}{skirstytiStudentus()}}
-{\footnotesize\ttfamily \label{funkcijos_8cpp_a3bcd71c154910a66e7be751cab3eb68d} 
-void skirstyti\+Studentus (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{grupe}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{kietiakiai}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{vargsai}{}\end{DoxyParamCaption})}
-
-
-
-Split students into two groups based on final grade. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em grupe} & Input vector of students \\
-\hline
-{\em kietiakiai} & Output vector for students with final grade \texorpdfstring{$>$}{>}= 5.\+0 \\
-\hline
-{\em vargsai} & Output vector for students with final grade \texorpdfstring{$<$}{<} 5.\+0 \\
-\hline
-\end{DoxyParams}
-\Hypertarget{funkcijos_8cpp_aa6728add47c688cc828f070be465134e}\index{funkcijos.cpp@{funkcijos.cpp}!sortStudentai@{sortStudentai}}
-\index{sortStudentai@{sortStudentai}!funkcijos.cpp@{funkcijos.cpp}}
-\doxysubsubsection{\texorpdfstring{sortStudentai()}{sortStudentai()}}
-{\footnotesize\ttfamily \label{funkcijos_8cpp_aa6728add47c688cc828f070be465134e} 
-void sort\+Studentai (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{grupe}{, }\item[{char}]{sorting\+Option}{}\end{DoxyParamCaption})}
-
-
-
-Sort students by specified criterion. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em grupe} & Students to sort \\
-\hline
-{\em sorting\+Option} & Sorting criterion\+: \textquotesingle{}v\textquotesingle{} (name), \textquotesingle{}p\textquotesingle{} (surname), \textquotesingle{}g\textquotesingle{} (final grade) \\
-\hline
-\end{DoxyParams}
-\Hypertarget{funkcijos_8cpp_a9b67506502ea72a87dd4f7e8cc0f0072}\index{funkcijos.cpp@{funkcijos.cpp}!testuotiDuomenuApdorojima@{testuotiDuomenuApdorojima}}
+\Hypertarget{funkcijos_8cpp_a3225ebb2cd4a8289a2529734d9f5b282}\index{funkcijos.cpp@{funkcijos.cpp}!testuotiDuomenuApdorojima@{testuotiDuomenuApdorojima}}
 \index{testuotiDuomenuApdorojima@{testuotiDuomenuApdorojima}!funkcijos.cpp@{funkcijos.cpp}}
 \doxysubsubsection{\texorpdfstring{testuotiDuomenuApdorojima()}{testuotiDuomenuApdorojima()}}
-{\footnotesize\ttfamily \label{funkcijos_8cpp_a9b67506502ea72a87dd4f7e8cc0f0072} 
-void testuoti\+Duomenu\+Apdorojima (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{aplankas}{, }\item[{int}]{skaicius}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{funkcijos_8cpp_a3225ebb2cd4a8289a2529734d9f5b282} 
+void testuoti\+Duomenu\+Apdorojima (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{aplankas}{, }\item[{int}]{skaicius}{, }\item[{int}]{test\+Choice}{}\end{DoxyParamCaption})}
 
 
 
@@ -176,7 +75,39 @@ Test data processing performance.
 \hline
 {\em skaicius} & Number of students \\
 \hline
+{\em test\+Choice} & Test choice (2 for std\+::vector, 3 for custom \doxylink{class_vector}{Vector}) \\
+\hline
 \end{DoxyParams}
+\Hypertarget{funkcijos_8cpp_ab4828f324b7c685ef09acdf898a93891}\index{funkcijos.cpp@{funkcijos.cpp}!testuotiDuomenuApdorojimaImpl@{testuotiDuomenuApdorojimaImpl}}
+\index{testuotiDuomenuApdorojimaImpl@{testuotiDuomenuApdorojimaImpl}!funkcijos.cpp@{funkcijos.cpp}}
+\doxysubsubsection{\texorpdfstring{testuotiDuomenuApdorojimaImpl()}{testuotiDuomenuApdorojimaImpl()}}
+{\footnotesize\ttfamily \label{funkcijos_8cpp_ab4828f324b7c685ef09acdf898a93891} 
+template$<$typename Container$>$ \\
+void testuoti\+Duomenu\+Apdorojima\+Impl (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{aplankas}{, }\item[{int}]{skaicius}{}\end{DoxyParamCaption})}
+
+
+
+Implementation of data processing test. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aplankas} & Directory for test files \\
+\hline
+{\em skaicius} & Number of students \\
+\hline
+\end{DoxyParams}
+\Hypertarget{funkcijos_8cpp_ac8002810986d15c30d12cced28326ed9}\index{funkcijos.cpp@{funkcijos.cpp}!testuotiDuomenuApdorojimaImpl$<$ std::vector$<$ Studentas $>$ $>$@{testuotiDuomenuApdorojimaImpl$<$ std::vector$<$ Studentas $>$ $>$}}
+\index{testuotiDuomenuApdorojimaImpl$<$ std::vector$<$ Studentas $>$ $>$@{testuotiDuomenuApdorojimaImpl$<$ std::vector$<$ Studentas $>$ $>$}!funkcijos.cpp@{funkcijos.cpp}}
+\doxysubsubsection{\texorpdfstring{testuotiDuomenuApdorojimaImpl$<$ std::vector$<$ Studentas $>$ $>$()}{testuotiDuomenuApdorojimaImpl< std::vector< Studentas > >()}}
+{\footnotesize\ttfamily \label{funkcijos_8cpp_ac8002810986d15c30d12cced28326ed9} 
+template void \mbox{\hyperlink{funkcijos_8cpp_ab4828f324b7c685ef09acdf898a93891}{testuoti\+Duomenu\+Apdorojima\+Impl}}$<$ std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ $>$ (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{aplankas}{, }\item[{int}]{skaicius}{}\end{DoxyParamCaption})}
+
+\Hypertarget{funkcijos_8cpp_aa003719201c2bca4b4e7fe17a6e6c3e5}\index{funkcijos.cpp@{funkcijos.cpp}!testuotiDuomenuApdorojimaImpl$<$ Vector$<$ Studentas $>$ $>$@{testuotiDuomenuApdorojimaImpl$<$ Vector$<$ Studentas $>$ $>$}}
+\index{testuotiDuomenuApdorojimaImpl$<$ Vector$<$ Studentas $>$ $>$@{testuotiDuomenuApdorojimaImpl$<$ Vector$<$ Studentas $>$ $>$}!funkcijos.cpp@{funkcijos.cpp}}
+\doxysubsubsection{\texorpdfstring{testuotiDuomenuApdorojimaImpl$<$ Vector$<$ Studentas $>$ $>$()}{testuotiDuomenuApdorojimaImpl< Vector< Studentas > >()}}
+{\footnotesize\ttfamily \label{funkcijos_8cpp_aa003719201c2bca4b4e7fe17a6e6c3e5} 
+template void \mbox{\hyperlink{funkcijos_8cpp_ab4828f324b7c685ef09acdf898a93891}{testuoti\+Duomenu\+Apdorojima\+Impl}}$<$ \mbox{\hyperlink{class_vector}{Vector}}$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ $>$ (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{aplankas}{, }\item[{int}]{skaicius}{}\end{DoxyParamCaption})}
+
 \Hypertarget{funkcijos_8cpp_a0bcc3fa49fd1bf2474cbfd5ccf2aaff2}\index{funkcijos.cpp@{funkcijos.cpp}!testuotiStudentoMetodus@{testuotiStudentoMetodus}}
 \index{testuotiStudentoMetodus@{testuotiStudentoMetodus}!funkcijos.cpp@{funkcijos.cpp}}
 \doxysubsubsection{\texorpdfstring{testuotiStudentoMetodus()}{testuotiStudentoMetodus()}}

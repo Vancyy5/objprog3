@@ -182,15 +182,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a56e5236896b579708ec4828a202df274" id="r_a56e5236896b579708ec4828a202df274"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56e5236896b579708ec4828a202df274">clearND</a> ()</td></tr>
 <tr class="memdesc:a56e5236896b579708ec4828a202df274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all homework grades.  <br /></td></tr>
 <tr class="separator:a56e5236896b579708ec4828a202df274"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab379d5906b265c0179280f3a3864a80" id="r_aab379d5906b265c0179280f3a3864a80"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab379d5906b265c0179280f3a3864a80">skaiciuotiVid</a> () const</td></tr>
-<tr class="memdesc:aab379d5906b265c0179280f3a3864a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate average of homework grades.  <br /></td></tr>
-<tr class="separator:aab379d5906b265c0179280f3a3864a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac207dc15bf0ae3cba6eca42681c792bc" id="r_ac207dc15bf0ae3cba6eca42681c792bc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac207dc15bf0ae3cba6eca42681c792bc">skaiciuotiMed</a> () const</td></tr>
-<tr class="memdesc:ac207dc15bf0ae3cba6eca42681c792bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate median of homework grades.  <br /></td></tr>
-<tr class="separator:ac207dc15bf0ae3cba6eca42681c792bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00616084632943b1a0b2cdb08ac35c35" id="r_a00616084632943b1a0b2cdb08ac35c35"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00616084632943b1a0b2cdb08ac35c35">galBalas</a> (bool naudotiVidurki=true) const</td></tr>
-<tr class="memdesc:a00616084632943b1a0b2cdb08ac35c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate final grade.  <br /></td></tr>
-<tr class="separator:a00616084632943b1a0b2cdb08ac35c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88eb1f9eade67260534d1188b3d10fe" id="r_ab88eb1f9eade67260534d1188b3d10fe"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab88eb1f9eade67260534d1188b3d10fe">galBalas</a> () const</td></tr>
+<tr class="memdesc:ab88eb1f9eade67260534d1188b3d10fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate final grade (average method)  <br /></td></tr>
+<tr class="separator:ab88eb1f9eade67260534d1188b3d10fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d384cb92c107a4780f2c3677bf8708d" id="r_a2d384cb92c107a4780f2c3677bf8708d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d384cb92c107a4780f2c3677bf8708d">galBalasMed</a> () const</td></tr>
+<tr class="memdesc:a2d384cb92c107a4780f2c3677bf8708d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate final grade (median method)  <br /></td></tr>
+<tr class="separator:a2d384cb92c107a4780f2c3677bf8708d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_zmogus"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_zmogus')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_zmogus.html">Zmogus</a></td></tr>
 <tr class="memitem:a905fef3b8ad421a6d023c7ebc295f48e inherit pub_methods_class_zmogus" id="r_a905fef3b8ad421a6d023c7ebc295f48e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zmogus.html#a905fef3b8ad421a6d023c7ebc295f48e">Zmogus</a> ()=default</td></tr>
 <tr class="memdesc:a905fef3b8ad421a6d023c7ebc295f48e inherit pub_methods_class_zmogus"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
@@ -228,9 +225,18 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aca0bcdc0f22c4caaacf94c5ca7544db0" id="r_aca0bcdc0f22c4caaacf94c5ca7544db0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca0bcdc0f22c4caaacf94c5ca7544db0">nuskaitymasFile</a> (std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;grupe, const std::string &amp;failoPavadinimas)</td></tr>
-<tr class="memdesc:aca0bcdc0f22c4caaacf94c5ca7544db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static method for reading students from file.  <br /></td></tr>
-<tr class="separator:aca0bcdc0f22c4caaacf94c5ca7544db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3821b97298ec1bd22b5b12494d3d9479" id="r_a3821b97298ec1bd22b5b12494d3d9479"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:a3821b97298ec1bd22b5b12494d3d9479"><td class="memTemplItemLeft" align="right" valign="top">static double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3821b97298ec1bd22b5b12494d3d9479">skaiciuotiVid</a> (const Container &amp;<a class="el" href="#adfecda15db6a1074b4224cbf6f9a1b8d">nd</a>)</td></tr>
+<tr class="memdesc:a3821b97298ec1bd22b5b12494d3d9479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate average of homework grades.  <br /></td></tr>
+<tr class="separator:a3821b97298ec1bd22b5b12494d3d9479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1357b76f411f6cb418ce745db20e58e" id="r_aa1357b76f411f6cb418ce745db20e58e"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:aa1357b76f411f6cb418ce745db20e58e"><td class="memTemplItemLeft" align="right" valign="top">static double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa1357b76f411f6cb418ce745db20e58e">skaiciuotiMed</a> (Container <a class="el" href="#adfecda15db6a1074b4224cbf6f9a1b8d">nd</a>)</td></tr>
+<tr class="memdesc:aa1357b76f411f6cb418ce745db20e58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate median of homework grades.  <br /></td></tr>
+<tr class="separator:aa1357b76f411f6cb418ce745db20e58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1838bcb79462e587ad50b406a64a98d5" id="r_a1838bcb79462e587ad50b406a64a98d5"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:a1838bcb79462e587ad50b406a64a98d5"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1838bcb79462e587ad50b406a64a98d5">nuskaitymasFile</a> (Container &amp;grupe, const std::string &amp;failoPavadinimas)</td></tr>
+<tr class="memdesc:a1838bcb79462e587ad50b406a64a98d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read students from file (static method)  <br /></td></tr>
+<tr class="separator:a1838bcb79462e587ad50b406a64a98d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -241,7 +247,7 @@ Static Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a1c3423fc1d91e7d2d8271884d60dde3c" id="r_a1c3423fc1d91e7d2d8271884d60dde3c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c3423fc1d91e7d2d8271884d60dde3c">nd_</a></td></tr>
-<tr class="memdesc:a1c3423fc1d91e7d2d8271884d60dde3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of homework (namų darbų) scores.  <br /></td></tr>
+<tr class="memdesc:a1c3423fc1d91e7d2d8271884d60dde3c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_vector.html" title="Dinaminis šabloninis konteineris, panašus į std::vector.">Vector</a> of homework (namų darbų) scores.  <br /></td></tr>
 <tr class="separator:a1c3423fc1d91e7d2d8271884d60dde3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2b6d614a1491c86854d0cd8454a4926" id="r_ab2b6d614a1491c86854d0cd8454a4926"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2b6d614a1491c86854d0cd8454a4926">egzaminas_</a></td></tr>
 <tr class="memdesc:ab2b6d614a1491c86854d0cd8454a4926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exam score.  <br /></td></tr>
@@ -518,29 +524,59 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a00616084632943b1a0b2cdb08ac35c35" name="a00616084632943b1a0b2cdb08ac35c35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00616084632943b1a0b2cdb08ac35c35">&#9670;&#160;</a></span>galBalas()</h2>
+<a id="ab88eb1f9eade67260534d1188b3d10fe" name="ab88eb1f9eade67260534d1188b3d10fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab88eb1f9eade67260534d1188b3d10fe">&#9670;&#160;</a></span>galBalas()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">double Studentas::galBalas </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>naudotiVidurki</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Calculate final grade. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">naudotiVidurki</td><td>Whether to use average (true) or median (false) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Final grade calculated as 0.4*homework + 0.6*exam </dd></dl>
+<p>Calculate final grade (average method) </p>
+<dl class="section return"><dt>Returns</dt><dd>Final grade based on homework average and exam </dd></dl>
+
+</div>
+</div>
+<a id="a2d384cb92c107a4780f2c3677bf8708d" name="a2d384cb92c107a4780f2c3677bf8708d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d384cb92c107a4780f2c3677bf8708d">&#9670;&#160;</a></span>galBalasMed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Studentas::galBalasMed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate final grade (median method) </p>
+<dl class="section return"><dt>Returns</dt><dd>Final grade based on homework median and exam </dd></dl>
 
 </div>
 </div>
@@ -596,23 +632,25 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get homework grades. </p>
-<dl class="section return"><dt>Returns</dt><dd>Vector of homework grades </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_vector.html" title="Dinaminis šabloninis konteineris, panašus į std::vector.">Vector</a> of homework grades </dd></dl>
 
 </div>
 </div>
-<a id="aca0bcdc0f22c4caaacf94c5ca7544db0" name="aca0bcdc0f22c4caaacf94c5ca7544db0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca0bcdc0f22c4caaacf94c5ca7544db0">&#9670;&#160;</a></span>nuskaitymasFile()</h2>
+<a id="a1838bcb79462e587ad50b406a64a98d5" name="a1838bcb79462e587ad50b406a64a98d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1838bcb79462e587ad50b406a64a98d5">&#9670;&#160;</a></span>nuskaitymasFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Studentas::nuskaitymasFile </td>
+          <td class="memname">static void Studentas::nuskaitymasFile </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>grupe</em></span>, </td>
+          <td class="paramtype">Container &amp;</td>          <td class="paramname"><span class="paramname"><em>grupe</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -622,16 +660,16 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Static method for reading students from file. </p>
+<p>Read students from file (static method) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">grupe</td><td>Vector to store students </td></tr>
-    <tr><td class="paramname">failoPavadinimas</td><td>Filename to read from </td></tr>
+    <tr><td class="paramname">grupe</td><td>Container to store students </td></tr>
+    <tr><td class="paramname">failoPavadinimas</td><td>Name of the file to read from </td></tr>
   </table>
   </dd>
 </dl>
@@ -860,55 +898,75 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ac207dc15bf0ae3cba6eca42681c792bc" name="ac207dc15bf0ae3cba6eca42681c792bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac207dc15bf0ae3cba6eca42681c792bc">&#9670;&#160;</a></span>skaiciuotiMed()</h2>
+<a id="aa1357b76f411f6cb418ce745db20e58e" name="aa1357b76f411f6cb418ce745db20e58e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1357b76f411f6cb418ce745db20e58e">&#9670;&#160;</a></span>skaiciuotiMed()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Studentas::skaiciuotiMed </td>
+          <td class="memname">static double Studentas::skaiciuotiMed </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">Container</td>          <td class="paramname"><span class="paramname"><em>nd</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Calculate median of homework grades. </p>
-<dl class="section return"><dt>Returns</dt><dd>Median of homework grades </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>If there are no homework grades </td></tr>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nd</td><td>Container of grades (will be sorted) </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Median value </dd></dl>
 
 </div>
 </div>
-<a id="aab379d5906b265c0179280f3a3864a80" name="aab379d5906b265c0179280f3a3864a80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab379d5906b265c0179280f3a3864a80">&#9670;&#160;</a></span>skaiciuotiVid()</h2>
+<a id="a3821b97298ec1bd22b5b12494d3d9479" name="a3821b97298ec1bd22b5b12494d3d9479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3821b97298ec1bd22b5b12494d3d9479">&#9670;&#160;</a></span>skaiciuotiVid()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Studentas::skaiciuotiVid </td>
+          <td class="memname">static double Studentas::skaiciuotiVid </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const Container &amp;</td>          <td class="paramname"><span class="paramname"><em>nd</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Calculate average of homework grades. </p>
-<dl class="section return"><dt>Returns</dt><dd>Average of homework grades </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>If there are no homework grades </td></tr>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nd</td><td>Container of grades </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Average value </dd></dl>
 
 </div>
 </div>
@@ -1005,7 +1063,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Vector of homework (namų darbų) scores. </p>
+<p><a class="el" href="class_vector.html" title="Dinaminis šabloninis konteineris, panašus į std::vector.">Vector</a> of homework (namų darbų) scores. </p>
 
 </div>
 </div>

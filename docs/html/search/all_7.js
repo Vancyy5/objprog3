@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['isvestistudentusifaila_0',['isvestiStudentusIFaila',['../funkcijos_8cpp.html#a611987d71fb1ea6c7b02ac55df0d05df',1,'isvestiStudentusIFaila(const std::vector&lt; Studentas &gt; &amp;studentai, const std::string &amp;failoPavadinimas, char ats):&#160;funkcijos.cpp'],['../funkcijos_8h.html#a611987d71fb1ea6c7b02ac55df0d05df',1,'isvestiStudentusIFaila(const std::vector&lt; Studentas &gt; &amp;studentai, const std::string &amp;failoPavadinimas, char ats):&#160;funkcijos.cpp']]]
+  ['insert_0',['insert',['../class_vector.html#a543330cea78641b32eb35d37e3642b51',1,'Vector::insert(const_iterator pos, const T &amp;value)'],['../class_vector.html#a3deda2957a8d4ec73fb9a6f1218d550a',1,'Vector::insert(const_iterator pos, T &amp;&amp;value)'],['../class_vector.html#a4ff158eb21cf52087614b3f2e3ae0467',1,'Vector::insert(const_iterator pos, size_type count, const T &amp;value)']]],
+  ['isvestistudentusifaila_1',['isvestiStudentusIFaila',['../funkcijos_8h.html#a96a474dca980a8647be70d7296ef172a',1,'funkcijos.h']]],
+  ['iterator_2',['iterator',['../class_vector.html#ac0f3602bfd8099ecf53f9aeb3cb90528',1,'Vector']]]
 ];

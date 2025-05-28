@@ -109,6 +109,9 @@ $(function(){initNavTree('funkcijos_8cpp.html',''); initResizable(true); });
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="funkcijos_8h_source.html">funkcijos.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="laikas_8h_source.html">laikas.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vector_8h_source.html">vector.h</a>&quot;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -121,21 +124,17 @@ Functions</h2></td></tr>
 <tr class="memitem:a9b6a228fc464a9d4c17b271db47a90ce" id="r_a9b6a228fc464a9d4c17b271db47a90ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b6a228fc464a9d4c17b271db47a90ce">compareByGalutinis</a> (const <a class="el" href="class_studentas.html">Studentas</a> &amp;a, const <a class="el" href="class_studentas.html">Studentas</a> &amp;b)</td></tr>
 <tr class="memdesc:a9b6a228fc464a9d4c17b271db47a90ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare students by final grade (descending)  <br /></td></tr>
 <tr class="separator:a9b6a228fc464a9d4c17b271db47a90ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55d40c2545ce55b7e4ee9536f339d291" id="r_a55d40c2545ce55b7e4ee9536f339d291"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55d40c2545ce55b7e4ee9536f339d291">skaitytiIsFailo</a> (std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;grupe, const std::string &amp;failoPavadinimas)</td></tr>
-<tr class="memdesc:a55d40c2545ce55b7e4ee9536f339d291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read students from file.  <br /></td></tr>
-<tr class="separator:a55d40c2545ce55b7e4ee9536f339d291"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a611987d71fb1ea6c7b02ac55df0d05df" id="r_a611987d71fb1ea6c7b02ac55df0d05df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a611987d71fb1ea6c7b02ac55df0d05df">isvestiStudentusIFaila</a> (const std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;studentai, const std::string &amp;failoPavadinimas, char ats)</td></tr>
-<tr class="memdesc:a611987d71fb1ea6c7b02ac55df0d05df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write students to file.  <br /></td></tr>
-<tr class="separator:a611987d71fb1ea6c7b02ac55df0d05df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6728add47c688cc828f070be465134e" id="r_aa6728add47c688cc828f070be465134e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6728add47c688cc828f070be465134e">sortStudentai</a> (std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;grupe, char sortingOption)</td></tr>
-<tr class="memdesc:aa6728add47c688cc828f070be465134e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort students by specified criterion.  <br /></td></tr>
-<tr class="separator:aa6728add47c688cc828f070be465134e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bcd71c154910a66e7be751cab3eb68d" id="r_a3bcd71c154910a66e7be751cab3eb68d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3bcd71c154910a66e7be751cab3eb68d">skirstytiStudentus</a> (std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;grupe, std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;kietiakiai, std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;vargsai)</td></tr>
-<tr class="memdesc:a3bcd71c154910a66e7be751cab3eb68d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split students into two groups based on final grade.  <br /></td></tr>
-<tr class="separator:a3bcd71c154910a66e7be751cab3eb68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b67506502ea72a87dd4f7e8cc0f0072" id="r_a9b67506502ea72a87dd4f7e8cc0f0072"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b67506502ea72a87dd4f7e8cc0f0072">testuotiDuomenuApdorojima</a> (const std::string &amp;aplankas, int skaicius)</td></tr>
-<tr class="memdesc:a9b67506502ea72a87dd4f7e8cc0f0072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test data processing performance.  <br /></td></tr>
-<tr class="separator:a9b67506502ea72a87dd4f7e8cc0f0072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4828f324b7c685ef09acdf898a93891" id="r_ab4828f324b7c685ef09acdf898a93891"><td class="memTemplParams" colspan="2">template&lt;typename Container&gt; </td></tr>
+<tr class="memitem:ab4828f324b7c685ef09acdf898a93891"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab4828f324b7c685ef09acdf898a93891">testuotiDuomenuApdorojimaImpl</a> (const std::string &amp;aplankas, int skaicius)</td></tr>
+<tr class="memdesc:ab4828f324b7c685ef09acdf898a93891"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of data processing test.  <br /></td></tr>
+<tr class="separator:ab4828f324b7c685ef09acdf898a93891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3225ebb2cd4a8289a2529734d9f5b282" id="r_a3225ebb2cd4a8289a2529734d9f5b282"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3225ebb2cd4a8289a2529734d9f5b282">testuotiDuomenuApdorojima</a> (const std::string &amp;aplankas, int skaicius, int testChoice)</td></tr>
+<tr class="memdesc:a3225ebb2cd4a8289a2529734d9f5b282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test data processing performance.  <br /></td></tr>
+<tr class="separator:a3225ebb2cd4a8289a2529734d9f5b282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8002810986d15c30d12cced28326ed9" id="r_ac8002810986d15c30d12cced28326ed9"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8002810986d15c30d12cced28326ed9">testuotiDuomenuApdorojimaImpl&lt; std::vector&lt; Studentas &gt; &gt;</a> (const std::string &amp;aplankas, int skaicius)</td></tr>
+<tr class="separator:ac8002810986d15c30d12cced28326ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa003719201c2bca4b4e7fe17a6e6c3e5" id="r_aa003719201c2bca4b4e7fe17a6e6c3e5"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa003719201c2bca4b4e7fe17a6e6c3e5">testuotiDuomenuApdorojimaImpl&lt; Vector&lt; Studentas &gt; &gt;</a> (const std::string &amp;aplankas, int skaicius)</td></tr>
+<tr class="separator:aa003719201c2bca4b4e7fe17a6e6c3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bcc3fa49fd1bf2474cbfd5ccf2aaff2" id="r_a0bcc3fa49fd1bf2474cbfd5ccf2aaff2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bcc3fa49fd1bf2474cbfd5ccf2aaff2">testuotiStudentoMetodus</a> ()</td></tr>
 <tr class="memdesc:a0bcc3fa49fd1bf2474cbfd5ccf2aaff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test <a class="el" href="class_studentas.html" title="Student class that inherits from Zmogus (Person) abstract class.">Studentas</a> class methods.  <br /></td></tr>
 <tr class="separator:a0bcc3fa49fd1bf2474cbfd5ccf2aaff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,14 +163,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compare students by final grade (descending) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>First student </td></tr>
-    <tr><td class="paramname">b</td><td>Second student </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if a's final grade is higher than b's </dd></dl>
 
 </div>
 </div>
@@ -195,14 +186,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compare students by last name. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>First student </td></tr>
-    <tr><td class="paramname">b</td><td>Second student </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if a's surname comes before b's </dd></dl>
 
 </div>
 </div>
@@ -226,151 +209,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compare students by first name. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>First student </td></tr>
-    <tr><td class="paramname">b</td><td>Second student </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if a's name comes before b's </dd></dl>
 
 </div>
 </div>
-<a id="a611987d71fb1ea6c7b02ac55df0d05df" name="a611987d71fb1ea6c7b02ac55df0d05df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a611987d71fb1ea6c7b02ac55df0d05df">&#9670;&#160;</a></span>isvestiStudentusIFaila()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void isvestiStudentusIFaila </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>studentai</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>failoPavadinimas</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>ats</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Write students to file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">studentai</td><td>Students to write </td></tr>
-    <tr><td class="paramname">failoPavadinimas</td><td>Filename to write to </td></tr>
-    <tr><td class="paramname">ats</td><td>Whether to use average ('v') or median ('m') for final grade </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a55d40c2545ce55b7e4ee9536f339d291" name="a55d40c2545ce55b7e4ee9536f339d291"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55d40c2545ce55b7e4ee9536f339d291">&#9670;&#160;</a></span>skaitytiIsFailo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void skaitytiIsFailo </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>grupe</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>failoPavadinimas</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read students from file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">grupe</td><td>Vector to store students </td></tr>
-    <tr><td class="paramname">failoPavadinimas</td><td>Filename to read from </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a3bcd71c154910a66e7be751cab3eb68d" name="a3bcd71c154910a66e7be751cab3eb68d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bcd71c154910a66e7be751cab3eb68d">&#9670;&#160;</a></span>skirstytiStudentus()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void skirstytiStudentus </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>grupe</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>kietiakiai</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>vargsai</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Split students into two groups based on final grade. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">grupe</td><td>Input vector of students </td></tr>
-    <tr><td class="paramname">kietiakiai</td><td>Output vector for students with final grade &gt;= 5.0 </td></tr>
-    <tr><td class="paramname">vargsai</td><td>Output vector for students with final grade &lt; 5.0 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aa6728add47c688cc828f070be465134e" name="aa6728add47c688cc828f070be465134e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6728add47c688cc828f070be465134e">&#9670;&#160;</a></span>sortStudentai()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void sortStudentai </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>grupe</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>sortingOption</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sort students by specified criterion. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">grupe</td><td>Students to sort </td></tr>
-    <tr><td class="paramname">sortingOption</td><td>Sorting criterion: 'v' (name), 'p' (surname), 'g' (final grade) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a9b67506502ea72a87dd4f7e8cc0f0072" name="a9b67506502ea72a87dd4f7e8cc0f0072"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b67506502ea72a87dd4f7e8cc0f0072">&#9670;&#160;</a></span>testuotiDuomenuApdorojima()</h2>
+<a id="a3225ebb2cd4a8289a2529734d9f5b282" name="a3225ebb2cd4a8289a2529734d9f5b282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3225ebb2cd4a8289a2529734d9f5b282">&#9670;&#160;</a></span>testuotiDuomenuApdorojima()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,7 +226,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>skaicius</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>skaicius</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>testChoice</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -393,9 +241,84 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">aplankas</td><td>Directory for files </td></tr>
     <tr><td class="paramname">skaicius</td><td>Number of students </td></tr>
+    <tr><td class="paramname">testChoice</td><td>Test choice (2 for std::vector, 3 for custom <a class="el" href="class_vector.html" title="Dinaminis šabloninis konteineris, panašus į std::vector.">Vector</a>) </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab4828f324b7c685ef09acdf898a93891" name="ab4828f324b7c685ef09acdf898a93891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4828f324b7c685ef09acdf898a93891">&#9670;&#160;</a></span>testuotiDuomenuApdorojimaImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void testuotiDuomenuApdorojimaImpl </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>aplankas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>skaicius</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implementation of data processing test. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aplankas</td><td>Directory for test files </td></tr>
+    <tr><td class="paramname">skaicius</td><td>Number of students </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac8002810986d15c30d12cced28326ed9" name="ac8002810986d15c30d12cced28326ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8002810986d15c30d12cced28326ed9">&#9670;&#160;</a></span>testuotiDuomenuApdorojimaImpl&lt; std::vector&lt; Studentas &gt; &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="#ab4828f324b7c685ef09acdf898a93891">testuotiDuomenuApdorojimaImpl</a>&lt; std::vector&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>aplankas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>skaicius</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa003719201c2bca4b4e7fe17a6e6c3e5" name="aa003719201c2bca4b4e7fe17a6e6c3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa003719201c2bca4b4e7fe17a6e6c3e5">&#9670;&#160;</a></span>testuotiDuomenuApdorojimaImpl&lt; Vector&lt; Studentas &gt; &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="#ab4828f324b7c685ef09acdf898a93891">testuotiDuomenuApdorojimaImpl</a>&lt; <a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="class_studentas.html">Studentas</a> &gt; &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>aplankas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>skaicius</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['egzaminas_5f_0',['egzaminas_',['../class_studentas.html#ab2b6d614a1491c86854d0cd8454a4926',1,'Studentas']]],
-  ['end_1',['end',['../class_laikas.html#a0e59f2d398abb6c164c2ce7723edf1b0',1,'Laikas']]]
+  ['data_5f_0',['data_',['../class_vector.html#ae8be70d76f89562fda76dbd21e90a409',1,'Vector']]],
+  ['destruktoriusk_1',['destruktoriuSk',['../class_studentas.html#ae812e25299cf9e3f0e7cd943c69eafa3',1,'Studentas']]]
 ];

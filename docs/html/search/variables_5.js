@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['start_0',['start',['../class_laikas.html#a26ce45452dd63b640635ae45ff6a3665',1,'Laikas']]]
+  ['pavarde_5f_0',['pavarde_',['../class_zmogus.html#a85cd6103a5f887059263d15413a3f081',1,'Zmogus']]]
 ];

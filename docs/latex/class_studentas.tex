@@ -54,12 +54,10 @@ void \mbox{\hyperlink{class_studentas_ac25b54f1d6f3a4374499a80b5ac46003}{add\+ND
 \begin{DoxyCompactList}\small\item\em Add a homework grade. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_studentas_a56e5236896b579708ec4828a202df274}{clear\+ND}} ()
 \begin{DoxyCompactList}\small\item\em Clear all homework grades. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_studentas_aab379d5906b265c0179280f3a3864a80}{skaiciuoti\+Vid}} () const
-\begin{DoxyCompactList}\small\item\em Calculate average of homework grades. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_studentas_ac207dc15bf0ae3cba6eca42681c792bc}{skaiciuoti\+Med}} () const
-\begin{DoxyCompactList}\small\item\em Calculate median of homework grades. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_studentas_a00616084632943b1a0b2cdb08ac35c35}{gal\+Balas}} (bool naudoti\+Vidurki=true) const
-\begin{DoxyCompactList}\small\item\em Calculate final grade. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double \mbox{\hyperlink{class_studentas_ab88eb1f9eade67260534d1188b3d10fe}{gal\+Balas}} () const
+\begin{DoxyCompactList}\small\item\em Calculate final grade (average method) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_studentas_a2d384cb92c107a4780f2c3677bf8708d}{gal\+Balas\+Med}} () const
+\begin{DoxyCompactList}\small\item\em Calculate final grade (median method) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_zmogus}{Zmogus}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -88,8 +86,12 @@ void \mbox{\hyperlink{class_zmogus_ae4c3b02e68af5ed87c68101ba699539c}{set\+Pavar
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{class_studentas_aca0bcdc0f22c4caaacf94c5ca7544db0}{nuskaitymas\+File}} (std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&grupe, const std\+::string \&failo\+Pavadinimas)
-\begin{DoxyCompactList}\small\item\em Static method for reading students from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\footnotesize template$<$typename Container$>$ }\\static double \mbox{\hyperlink{class_studentas_a3821b97298ec1bd22b5b12494d3d9479}{skaiciuoti\+Vid}} (const Container \&\mbox{\hyperlink{class_studentas_adfecda15db6a1074b4224cbf6f9a1b8d}{nd}})
+\begin{DoxyCompactList}\small\item\em Calculate average of homework grades. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static double \mbox{\hyperlink{class_studentas_aa1357b76f411f6cb418ce745db20e58e}{skaiciuoti\+Med}} (Container \mbox{\hyperlink{class_studentas_adfecda15db6a1074b4224cbf6f9a1b8d}{nd}})
+\begin{DoxyCompactList}\small\item\em Calculate median of homework grades. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static void \mbox{\hyperlink{class_studentas_a1838bcb79462e587ad50b406a64a98d5}{nuskaitymas\+File}} (Container \&grupe, const std\+::string \&failo\+Pavadinimas)
+\begin{DoxyCompactList}\small\item\em Read students from file (static method) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -99,7 +101,7 @@ static int \mbox{\hyperlink{class_studentas_ae812e25299cf9e3f0e7cd943c69eafa3}{d
 \begin{DoxyCompactItemize}
 \item 
 std\+::vector$<$ int $>$ \mbox{\hyperlink{class_studentas_a1c3423fc1d91e7d2d8271884d60dde3c}{nd\+\_\+}}
-\begin{DoxyCompactList}\small\item\em Vector of homework (namų darbų) scores. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \doxylink{class_vector}{Vector} of homework (namų darbų) scores. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_studentas_ab2b6d614a1491c86854d0cd8454a4926}{egzaminas\+\_\+}}
 \begin{DoxyCompactList}\small\item\em Exam score. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_studentas_a23307b2f7e41031cd7958022f0adbdae}{galutinis\+\_\+}}
@@ -248,23 +250,31 @@ Get exam grade.
 \begin{DoxyReturn}{Returns}
 Exam grade 
 \end{DoxyReturn}
-\Hypertarget{class_studentas_a00616084632943b1a0b2cdb08ac35c35}\index{Studentas@{Studentas}!galBalas@{galBalas}}
+\Hypertarget{class_studentas_ab88eb1f9eade67260534d1188b3d10fe}\index{Studentas@{Studentas}!galBalas@{galBalas}}
 \index{galBalas@{galBalas}!Studentas@{Studentas}}
 \doxysubsubsection{\texorpdfstring{galBalas()}{galBalas()}}
-{\footnotesize\ttfamily \label{class_studentas_a00616084632943b1a0b2cdb08ac35c35} 
-double Studentas\+::gal\+Balas (\begin{DoxyParamCaption}\item[{bool}]{naudoti\+Vidurki}{ = {\ttfamily true}}\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{class_studentas_ab88eb1f9eade67260534d1188b3d10fe} 
+double Studentas\+::gal\+Balas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Calculate final grade. 
+Calculate final grade (average method) 
 
-
-\begin{DoxyParams}{Parameters}
-{\em naudoti\+Vidurki} & Whether to use average (true) or median (false) \\
-\hline
-\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Final grade calculated as 0.\+4\texorpdfstring{$\ast$}{*}homework + 0.\+6\texorpdfstring{$\ast$}{*}exam 
+Final grade based on homework average and exam 
+\end{DoxyReturn}
+\Hypertarget{class_studentas_a2d384cb92c107a4780f2c3677bf8708d}\index{Studentas@{Studentas}!galBalasMed@{galBalasMed}}
+\index{galBalasMed@{galBalasMed}!Studentas@{Studentas}}
+\doxysubsubsection{\texorpdfstring{galBalasMed()}{galBalasMed()}}
+{\footnotesize\ttfamily \label{class_studentas_a2d384cb92c107a4780f2c3677bf8708d} 
+double Studentas\+::gal\+Balas\+Med (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate final grade (median method) 
+
+\begin{DoxyReturn}{Returns}
+Final grade based on homework median and exam 
 \end{DoxyReturn}
 \Hypertarget{class_studentas_a448772adf518582b94ac0ac39e224a16}\index{Studentas@{Studentas}!galutinis@{galutinis}}
 \index{galutinis@{galutinis}!Studentas@{Studentas}}
@@ -290,23 +300,24 @@ std\+::vector$<$ int $>$ Studentas\+::nd (\begin{DoxyParamCaption}{}{}\end{DoxyP
 Get homework grades. 
 
 \begin{DoxyReturn}{Returns}
-Vector of homework grades 
+\doxylink{class_vector}{Vector} of homework grades 
 \end{DoxyReturn}
-\Hypertarget{class_studentas_aca0bcdc0f22c4caaacf94c5ca7544db0}\index{Studentas@{Studentas}!nuskaitymasFile@{nuskaitymasFile}}
+\Hypertarget{class_studentas_a1838bcb79462e587ad50b406a64a98d5}\index{Studentas@{Studentas}!nuskaitymasFile@{nuskaitymasFile}}
 \index{nuskaitymasFile@{nuskaitymasFile}!Studentas@{Studentas}}
 \doxysubsubsection{\texorpdfstring{nuskaitymasFile()}{nuskaitymasFile()}}
-{\footnotesize\ttfamily \label{class_studentas_aca0bcdc0f22c4caaacf94c5ca7544db0} 
-void Studentas\+::nuskaitymas\+File (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{grupe}{, }\item[{const std\+::string \&}]{failo\+Pavadinimas}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily \label{class_studentas_a1838bcb79462e587ad50b406a64a98d5} 
+template$<$typename Container$>$ \\
+static void Studentas\+::nuskaitymas\+File (\begin{DoxyParamCaption}\item[{Container \&}]{grupe}{, }\item[{const std\+::string \&}]{failo\+Pavadinimas}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Static method for reading students from file. 
+Read students from file (static method) 
 
 
 \begin{DoxyParams}{Parameters}
-{\em grupe} & Vector to store students \\
+{\em grupe} & Container to store students \\
 \hline
-{\em failo\+Pavadinimas} & Filename to read from \\
+{\em failo\+Pavadinimas} & Name of the file to read from \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_studentas_a25bcc531503d3bc490dab4a656e3b8e9}\index{Studentas@{Studentas}!operator=@{operator=}}
@@ -431,42 +442,44 @@ Set final grade.
 {\em galutinis} & Final grade to set \\
 \hline
 \end{DoxyParams}
-\Hypertarget{class_studentas_ac207dc15bf0ae3cba6eca42681c792bc}\index{Studentas@{Studentas}!skaiciuotiMed@{skaiciuotiMed}}
+\Hypertarget{class_studentas_aa1357b76f411f6cb418ce745db20e58e}\index{Studentas@{Studentas}!skaiciuotiMed@{skaiciuotiMed}}
 \index{skaiciuotiMed@{skaiciuotiMed}!Studentas@{Studentas}}
 \doxysubsubsection{\texorpdfstring{skaiciuotiMed()}{skaiciuotiMed()}}
-{\footnotesize\ttfamily \label{class_studentas_ac207dc15bf0ae3cba6eca42681c792bc} 
-double Studentas\+::skaiciuoti\+Med (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{class_studentas_aa1357b76f411f6cb418ce745db20e58e} 
+template$<$typename Container$>$ \\
+static double Studentas\+::skaiciuoti\+Med (\begin{DoxyParamCaption}\item[{Container}]{nd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
 Calculate median of homework grades. 
 
-\begin{DoxyReturn}{Returns}
-Median of homework grades 
-\end{DoxyReturn}
 
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::runtime\+\_\+error} & If there are no homework grades \\
+\begin{DoxyParams}{Parameters}
+{\em nd} & Container of grades (will be sorted) \\
 \hline
-\end{DoxyExceptions}
-\Hypertarget{class_studentas_aab379d5906b265c0179280f3a3864a80}\index{Studentas@{Studentas}!skaiciuotiVid@{skaiciuotiVid}}
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Median value 
+\end{DoxyReturn}
+\Hypertarget{class_studentas_a3821b97298ec1bd22b5b12494d3d9479}\index{Studentas@{Studentas}!skaiciuotiVid@{skaiciuotiVid}}
 \index{skaiciuotiVid@{skaiciuotiVid}!Studentas@{Studentas}}
 \doxysubsubsection{\texorpdfstring{skaiciuotiVid()}{skaiciuotiVid()}}
-{\footnotesize\ttfamily \label{class_studentas_aab379d5906b265c0179280f3a3864a80} 
-double Studentas\+::skaiciuoti\+Vid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{class_studentas_a3821b97298ec1bd22b5b12494d3d9479} 
+template$<$typename Container$>$ \\
+static double Studentas\+::skaiciuoti\+Vid (\begin{DoxyParamCaption}\item[{const Container \&}]{nd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
 Calculate average of homework grades. 
 
-\begin{DoxyReturn}{Returns}
-Average of homework grades 
-\end{DoxyReturn}
 
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::runtime\+\_\+error} & If there are no homework grades \\
+\begin{DoxyParams}{Parameters}
+{\em nd} & Container of grades \\
 \hline
-\end{DoxyExceptions}
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Average value 
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}
@@ -508,7 +521,7 @@ std\+::vector$<$int$>$ Studentas\+::nd\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Vector of homework (namų darbų) scores. 
+\doxylink{class_vector}{Vector} of homework (namų darbų) scores. 
 
 
 
