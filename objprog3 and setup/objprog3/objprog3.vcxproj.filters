@@ -74,13 +74,13 @@
     <ClInclude Include="..\..\laikas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\zmogus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\external\googletest\googletest\src\gtest-internal-inl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
