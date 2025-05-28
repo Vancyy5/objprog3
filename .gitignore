@@ -6,7 +6,7 @@
 # User-specific files
 *.rsuser
 *.suo
-*.user
+*.users
 *.userosscache
 *.sln.docstates
 
@@ -33,7 +33,7 @@ bld/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
-.vs/
+./vs
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -409,3 +409,5 @@ test_files/
 failinis.txt
 rezultataiT.txt
 studentai.txt
+
+*.sln

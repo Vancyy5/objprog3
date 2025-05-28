@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{143850E7-150F-42E7-827F-C1A578F5E037}|objprog3\\objprog3.vcxproj|C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\objprog3\\objprog3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{143850E7-150F-42E7-827F-C1A578F5E037}|objprog3\\objprog3.vcxproj|solutionrelative:objprog3\\objprog3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "objprog3.cpp",
+              "DocumentMoniker": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\objprog3\\objprog3.cpp",
+              "RelativeDocumentMoniker": "objprog3\\objprog3.cpp",
+              "ToolTip": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\objprog3\\objprog3.cpp",
+              "RelativeToolTip": "objprog3\\objprog3.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-28T07:16:39.123Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
