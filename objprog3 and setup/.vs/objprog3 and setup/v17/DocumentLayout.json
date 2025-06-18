@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\objprog3 and setup\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E981532B-4332-4097-8C34-D86C7A3F05AB}|objprog3\\objprog3.vcxproj|C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\funkcijos.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{E981532B-4332-4097-8C34-D86C7A3F05AB}|objprog3\\objprog3.vcxproj|C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,14 +18,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "funkcijos.cpp",
-              "DocumentMoniker": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\funkcijos.cpp",
-              "RelativeDocumentMoniker": "..\\funkcijos.cpp",
-              "ToolTip": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\funkcijos.cpp",
-              "RelativeToolTip": "..\\funkcijos.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\main.cpp",
+              "RelativeDocumentMoniker": "..\\main.cpp",
+              "ToolTip": "C:\\Users\\balsy\\OneDrive\\Stalinis kompiuteris\\objprog3\\main.cpp",
+              "RelativeToolTip": "..\\main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-28T08:17:33.788Z",
+              "WhenOpened": "2025-06-18T13:35:35.672Z",
               "EditorCaption": ""
             }
           ]

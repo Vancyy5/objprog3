@@ -21,6 +21,7 @@ int main()
         if (tolower(testChoice) == '1') 
         {
             testuotiStudentoMetodus();
+            std::cin.get();
             return 0;
         }
         
@@ -63,7 +64,7 @@ int main()
         }
         
         testuotiDuomenuApdorojima(aplankas, skaicius, testChoice);
-        
+        std::cin.get();
         return 0;
        }
        
@@ -133,25 +134,29 @@ int main()
     }
     std::cout << "Vector perskirstymu skaicius: " << v2.reallocations() << "\n";
         nuskaitymasv2.baigti();
-        
+        std::cin.get();
         return 0;
         }
 
         else 
         {
-            std::cout <<"Programs pabaiga" << std::endl;
+            std::cout <<"Programos pabaiga" << std::endl;
+            std::cin.get();
             return 1;
         }
 
     }
     catch (const std::exception& e) {
         std::cerr << "Ivyko klaida: " << e.what() << std::endl;
+        std::cin.get();
         return 1;
     }
     catch (...) {
         std::cerr << "Nezinoma klaida." << std::endl;
+        std::cin.get();
         return 1;
     }
 
+    std::cin.get();
     return 0;
 }

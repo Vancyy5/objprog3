@@ -190,6 +190,7 @@ void testuotiDuomenuApdorojimaImpl(const std::string& aplankas, int skaicius)
     
     kietiakiai.clear();
     vargsai.clear();
+    std::cin.get();
 }
 
 void testuotiDuomenuApdorojima(const std::string& aplankas, int skaicius, int testChoice)
@@ -401,6 +402,7 @@ void testuotiStudentoMetodus() {
 
     std::ifstream failIn("failinis.txt");
     Studentas s8;
+    s8.setVardas("Jonas");
     failIn >> s8;
     failIn.close();
     s8.setGalutinis(s8.galBalas());
